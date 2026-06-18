@@ -1,0 +1,8 @@
+name = "linktree"
+compatibility_date = "2026-06-18"
+compatibility_flags = [ "global_fetch_strictly_public" ]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "linktree_db"
+database_id = "local-d1-placeholder"
