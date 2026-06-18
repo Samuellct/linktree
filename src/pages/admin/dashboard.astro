@@ -1,15 +1,25 @@
 ---
 import AdminLayout from '../../layouts/AdminLayout.astro';
 import { DashboardStats } from '../../components/admin/DashboardStats';
-import { getAnalyticsStats, getSettings } from '../../lib/db';
+import { getAnalyticsStats, getSettings, getDb } from '../../lib/db';
 
-const db = Astro.locals.runtime.env.DB;
+const db = getDb(Astro.locals);
 
 // Fetch settings for Umami configuration
-const settings = await getSettings(db);
+const settings = db ? await getSettings(db) : {};
 
 // Fetch analytics statistics (last 30 days default)
-const stats = await getAnalyticsStats(db);
+const stats = db ? await getAnalyticsStats(db) : {
+  totalVisits: 0,
+  uniqueVisitors: 0,
+  totalClicks: 0,
+  clicksPerLink: [],
+  visitsOverTime: [],
+  clicksOverTime: [],
+  devices: [],
+  browsers: [],
+  countries: [],
+};
 ---
 
 <AdminLayout title="Tableau de bord" activeTab="dashboard">

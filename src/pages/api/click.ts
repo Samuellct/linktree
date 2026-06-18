@@ -1,10 +1,13 @@
 import type { APIRoute } from "astro";
-import { logEvent } from "../../lib/db";
+import { logEvent, getDb } from "../../lib/db";
 import { parseUserAgent } from "../../lib/utils";
 
 export const GET: APIRoute = async ({ request, locals, url }) => {
   try {
-    const db = locals.runtime.env.DB;
+    const db = getDb(locals);
+    if (!db) {
+      return Response.redirect(new URL("/", request.url), 302);
+    }
     const linkId = url.searchParams.get("id");
 
     if (!linkId) {

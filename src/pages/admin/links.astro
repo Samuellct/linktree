@@ -1,12 +1,12 @@
 ---
 import AdminLayout from '../../layouts/AdminLayout.astro';
 import { LinkEditor } from '../../components/admin/LinkEditor';
-import { getAllLinks } from '../../lib/db';
+import { getAllLinks, getDb } from '../../lib/db';
 
-const db = Astro.locals.runtime.env.DB;
+const db = getDb(Astro.locals);
 
 // Fetch links from database
-const links = await getAllLinks(db);
+const links = db ? await getAllLinks(db) : [];
 ---
 
 <AdminLayout title="Gestion des liens" activeTab="links">

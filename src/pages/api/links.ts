@@ -1,9 +1,11 @@
-import type { APIRoute } from "astro";
-import { getAllLinks, createLink, updateLink, deleteLink, reorderLinks } from "../../lib/db";
+import { getAllLinks, createLink, updateLink, deleteLink, reorderLinks, getDb } from "../../lib/db";
 
 export const GET: APIRoute = async ({ locals }) => {
   try {
-    const db = locals.runtime.env.DB;
+    const db = getDb(locals);
+    if (!db) {
+      return new Response(JSON.stringify({ error: "Base de données non disponible" }), { status: 500 });
+    }
     const links = await getAllLinks(db);
     return new Response(JSON.stringify(links), {
       headers: { "Content-Type": "application/json" },
@@ -16,7 +18,10 @@ export const GET: APIRoute = async ({ locals }) => {
 
 export const POST: APIRoute = async ({ request, locals }) => {
   try {
-    const db = locals.runtime.env.DB;
+    const db = getDb(locals);
+    if (!db) {
+      return new Response(JSON.stringify({ error: "Base de données non disponible" }), { status: 500 });
+    }
     const body = await request.json();
     const { title, url, preview_image, description, icon, accent_color, enabled } = body;
 
@@ -47,7 +52,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
 export const PUT: APIRoute = async ({ request, locals }) => {
   try {
-    const db = locals.runtime.env.DB;
+    const db = getDb(locals);
+    if (!db) {
+      return new Response(JSON.stringify({ error: "Base de données non disponible" }), { status: 500 });
+    }
     const body = await request.json();
 
     // Reorder flow
@@ -89,7 +97,10 @@ export const PUT: APIRoute = async ({ request, locals }) => {
 
 export const DELETE: APIRoute = async ({ request, locals, url }) => {
   try {
-    const db = locals.runtime.env.DB;
+    const db = getDb(locals);
+    if (!db) {
+      return new Response(JSON.stringify({ error: "Base de données non disponible" }), { status: 500 });
+    }
     const id = url.searchParams.get("id");
 
     if (!id) {

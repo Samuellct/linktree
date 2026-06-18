@@ -33,7 +33,17 @@ export interface AnalyticsStats {
 // - site_name, bio, avatar, theme_color, custom_css, font_family, animations_enabled (0/1), umami_id, umami_url, seo_title, seo_description, og_image, favicon, social_github, social_twitter, social_linkedin, social_instagram, social_youtube
 export type Settings = Record<string, string>;
 
+// Safely retrieve D1 Database binding
+export function getDb(locals: any): D1Database | null {
+  try {
+    return locals?.runtime?.env?.DB || null;
+  } catch (e) {
+    return null;
+  }
+}
+
 // DB helper functions
+
 
 // --- Settings ---
 export async function getSettings(db: D1Database): Promise<Settings> {

@@ -6,7 +6,15 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const path = url.pathname;
 
   // Fetch secret from bindings or use fallback for dev
-  const secret = context.locals.runtime?.env?.JWT_SECRET || "dev-linktree-secret-key-987654321";
+  let secret = "dev-linktree-secret-key-987654321";
+  try {
+    const jwtSecret = context.locals.runtime?.env?.JWT_SECRET;
+    if (jwtSecret) {
+      secret = jwtSecret;
+    }
+  } catch (e) {
+    // Ignore env getter errors in non-request dev environments
+  }
 
   const isProtectedPath = 
     (path.startsWith("/admin") && path !== "/admin/login") ||

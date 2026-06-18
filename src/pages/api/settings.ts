@@ -1,9 +1,12 @@
 import type { APIRoute } from "astro";
-import { updateSettings } from "../../lib/db";
+import { updateSettings, getDb } from "../../lib/db";
 
 export const PUT: APIRoute = async ({ request, locals }) => {
   try {
-    const db = locals.runtime.env.DB;
+    const db = getDb(locals);
+    if (!db) {
+      return new Response(JSON.stringify({ error: "Base de données non disponible" }), { status: 500 });
+    }
     const body = await request.json();
 
     if (!body || typeof body !== "object") {

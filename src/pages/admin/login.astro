@@ -1,11 +1,20 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { LoginCard } from '../../components/admin/LoginCard';
-import { hasAnyUsers } from '../../lib/db';
+import { hasAnyUsers, getDb } from '../../lib/db';
 import { verifySessionToken } from '../../lib/auth';
 
-const db = Astro.locals.runtime.env.DB;
-const secret = Astro.locals.runtime?.env?.JWT_SECRET || "dev-linktree-secret-key-987654321";
+const db = getDb(Astro.locals);
+
+let secret = "dev-linktree-secret-key-987654321";
+try {
+  const jwtSecret = Astro.locals.runtime?.env?.JWT_SECRET;
+  if (jwtSecret) {
+    secret = jwtSecret;
+  }
+} catch (e) {
+  // Ignore env getter errors in Vite SSR context
+}
 
 // Check if user is already logged in
 const sessionCookie = Astro.cookies.get('admin_session')?.value;
@@ -17,7 +26,7 @@ if (sessionCookie) {
 }
 
 // Check if any users exist (to decide if we show first-time setup or normal login)
-const usersExist = await hasAnyUsers(db);
+const usersExist = db ? await hasAnyUsers(db) : false;
 const isSetup = !usersExist;
 ---
 

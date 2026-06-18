@@ -1,16 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getSettings, getEnabledLinks, logEvent } from '../lib/db';
+import { getSettings, getEnabledLinks, logEvent, getDb } from '../lib/db';
 import { parseUserAgent } from '../lib/utils';
 import { PreviewCard } from '../components/PreviewCard';
 import * as LucideIcons from 'lucide-react';
 
-// Connect to D1 database
-const db = Astro.locals.runtime.env.DB;
+// Connect to D1 database safely
+const db = getDb(Astro.locals);
 
 // Fetch settings and links from database
-const settings = await getSettings(db);
-const links = await getEnabledLinks(db);
+const settings = db ? await getSettings(db) : {};
+const links = db ? await getEnabledLinks(db) : [];
 
 // Extract visitor details and log visit
 const userAgent = Astro.request.headers.get('user-agent');
@@ -18,15 +18,17 @@ const { device, browser } = parseUserAgent(userAgent);
 const country = Astro.request.headers.get('cf-ipcountry') || 'XX';
 
 // Log visit asynchronously
-try {
-  await logEvent(db, {
-    event_type: 'visit',
-    device,
-    browser,
-    country,
-  });
-} catch (e) {
-  console.error("Error logging visit:", e);
+if (db) {
+  try {
+    await logEvent(db, {
+      event_type: 'visit',
+      device,
+      browser,
+      country,
+    });
+  } catch (e) {
+    console.error("Error logging visit:", e);
+  }
 }
 
 // User visual preferences

@@ -1,10 +1,13 @@
 import type { APIRoute } from "astro";
-import { getUserByEmail, createUser, hasAnyUsers } from "../../lib/db";
+import { getUserByEmail, createUser, hasAnyUsers, getDb } from "../../lib/db";
 import { hashPassword, verifyPassword, createSessionToken } from "../../lib/auth";
 
 export const POST: APIRoute = async ({ request, cookies, locals }) => {
   try {
-    const db = locals.runtime.env.DB;
+    const db = getDb(locals);
+    if (!db) {
+      return new Response(JSON.stringify({ error: "Base de données non disponible" }), { status: 500 });
+    }
     const body = await request.json();
     const { email, password, isSetup } = body;
 
@@ -12,7 +15,15 @@ export const POST: APIRoute = async ({ request, cookies, locals }) => {
       return new Response(JSON.stringify({ error: "Champs requis manquants" }), { status: 400 });
     }
 
-    const secret = locals.runtime.env.JWT_SECRET || "dev-linktree-secret-key-987654321";
+    let secret = "dev-linktree-secret-key-987654321";
+    try {
+      const jwtSecret = locals.runtime?.env?.JWT_SECRET;
+      if (jwtSecret) {
+        secret = jwtSecret;
+      }
+    } catch (e) {
+      // Ignore env getter errors in dev
+    }
 
     // Handle First-Time Setup Registration
     if (isSetup) {
