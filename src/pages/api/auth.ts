@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { getUserByEmail, createUser, hasAnyUsers, getDb } from "../../lib/db";
 import { hashPassword, verifyPassword, createSessionToken } from "../../lib/auth";
+import { env } from "cloudflare:workers";
 
 export const POST: APIRoute = async ({ request, cookies, locals }) => {
   try {
@@ -17,7 +18,7 @@ export const POST: APIRoute = async ({ request, cookies, locals }) => {
 
     let secret = "dev-linktree-secret-key-987654321";
     try {
-      const jwtSecret = locals.runtime?.env?.JWT_SECRET;
+      const jwtSecret = (env as any).JWT_SECRET;
       if (jwtSecret) {
         secret = jwtSecret;
       }
