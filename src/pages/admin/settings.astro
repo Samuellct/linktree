@@ -1,0 +1,14 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { SettingsEditor } from '../../components/admin/SettingsEditor';
+import { getSettings } from '../../lib/db';
+
+const db = Astro.locals.runtime.env.DB;
+
+// Fetch settings from database
+const settings = await getSettings(db);
+---
+
+<AdminLayout title="Configuration du site" activeTab="settings">
+  <SettingsEditor client:load initialSettings={settings} />
+</AdminLayout>

@@ -1,0 +1,5 @@
+---
+// Since middleware intercepts /admin and redirects to /admin/login if not logged in,
+// reaching this point means the user is authenticated. We redirect them to /admin/dashboard.
+return Astro.redirect('/admin/dashboard');
+---

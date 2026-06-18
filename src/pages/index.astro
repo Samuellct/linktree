@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getSettings, getEnabledLinks, logEvent } from '../lib/db';
+import { parseUserAgent } from '../lib/utils';
+import { PreviewCard } from '../components/PreviewCard';
+import * as LucideIcons from 'lucide-react';
+
+// Connect to D1 database
+const db = Astro.locals.runtime.env.DB;
+
+// Fetch settings and links from database
+const settings = await getSettings(db);
+const links = await getEnabledLinks(db);
+
+// Extract visitor details and log visit
+const userAgent = Astro.request.headers.get('user-agent');
+const { device, browser } = parseUserAgent(userAgent);
+const country = Astro.request.headers.get('cf-ipcountry') || 'XX';
+
+// Log visit asynchronously
+try {
+  await logEvent(db, {
+    event_type: 'visit',
+    device,
+    browser,
+    country,
+  });
+} catch (e) {
+  console.error("Error logging visit:", e);
+}
+
+// User visual preferences
+const avatar = settings.avatar || "";
+const siteName = settings.site_name || "Mon Profile";
+const bio = settings.bio || "Bienvenue sur ma page de liens !";
+const animationsEnabled = settings.animations_enabled !== "0";
+
+// Social links configuration
+const socials = [
+  { key: 'social_github', icon: 'Github', label: 'GitHub', prefix: 'https://github.com/' },
+  { key: 'social_twitter', icon: 'Twitter', label: 'Twitter', prefix: 'https://twitter.com/' },
+  { key: 'social_linkedin', icon: 'Linkedin', label: 'LinkedIn', prefix: 'https://linkedin.com/in/' },
+  { key: 'social_instagram', icon: 'Instagram', label: 'Instagram', prefix: 'https://instagram.com/' },
+  { key: 'social_youtube', icon: 'Youtube', label: 'YouTube', prefix: 'https://youtube.com/' },
+];
+
+const activeSocials = socials
+  .filter(s => settings[s.key])
+  .map(s => {
+    let url = settings[s.key];
+    if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+      url = s.prefix + url;
+    }
+    return { ...s, url };
+  });
+---
+
+<Layout settings={settings}>
+  <div class="min-h-screen flex flex-col justify-between py-12 px-4 relative overflow-hidden bg-slate-950">
+    
+    <!-- Premium background elements -->
+    <div class="absolute inset-0 z-0 pointer-events-none opacity-20">
+      <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500 blur-[120px]"></div>
+      <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-violet-600 blur-[120px]"></div>
+    </div>
+
+    <!-- Main Content Card -->
+    <div class="max-w-md w-full mx-auto z-10 text-center flex-grow flex flex-col justify-center">
+      
+      <!-- Profile Header -->
+      <div class="mb-8">
+        <div class="relative inline-block">
+          {avatar ? (
+            <img 
+              src={avatar} 
+              alt={siteName} 
+              class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-indigo-500/50 shadow-xl"
+            />
+          ) : (
+            <div class="w-24 h-24 rounded-full mx-auto bg-slate-800 border-2 border-indigo-500/30 flex items-center justify-center text-slate-400">
+              <LucideIcons.User className="w-12 h-12" />
+            </div>
+          )}
+          <div class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-green-500 border-2 border-slate-950"></div>
+        </div>
+
+        <h1 class="text-2xl font-bold text-white mt-4 tracking-tight">
+          {siteName}
+        </h1>
+        {bio && (
+          <p class="text-sm text-slate-400 mt-2 max-w-sm mx-auto px-4 font-light">
+            {bio}
+          </p>
+        )}
+      </div>
+
+      <!-- Social Icons -->
+      {activeSocials.length > 0 && (
+        <div class="flex justify-center gap-4 mb-8">
+          {activeSocials.map(social => {
+            const IconComponent = (LucideIcons as any)[social.icon] || LucideIcons.Globe;
+            return (
+              <a 
+                href={social.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="p-2.5 rounded-xl bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/50 text-slate-400 hover:text-white transition-all duration-200 hover:-translate-y-0.5"
+                aria-label={social.label}
+              >
+                <IconComponent className="w-5 h-5" />
+              </a>
+            );
+          })}
+        </div>
+      )}
+
+      <!-- Links List -->
+      <div class="space-y-4">
+        {links.length > 0 ? (
+          links.map(link => (
+            <PreviewCard 
+              client:load
+              title={link.title}
+              url={link.url}
+              previewImage={link.preview_image}
+              description={link.description}
+              accentColor={link.accent_color}
+              iconName={link.icon}
+              clickUrl={`/api/click?id=${link.id}`}
+              animationsEnabled={animationsEnabled}
+            />
+          ))
+        ) : (
+          <div class="py-8 px-4 rounded-2xl border border-dashed border-slate-800 text-slate-500 text-sm">
+            Aucun lien disponible pour le moment.
+          </div>
+        )}
+      </div>
+
+    </div>
+
+    <!-- Page Footer & Secret Admin Access -->
+    <footer class="z-10 text-center pt-8 text-xs text-slate-600 flex justify-between items-center max-w-md w-full mx-auto px-4">
+      <span>Propulsé par Antigravity</span>
+      
+      <!-- Discrete admin login gear button -->
+      <a 
+        href="/admin/dashboard" 
+        class="p-1.5 rounded-lg text-slate-700 hover:text-slate-500 hover:bg-slate-900/20 transition-all duration-200"
+        aria-label="Accès administration"
+      >
+        <LucideIcons.Settings className="w-4 h-4" />
+      </a>
+    </footer>
+
+  </div>
+</Layout>

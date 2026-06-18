@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+import type { Settings } from '../lib/db';
+
+interface Props {
+  title?: string;
+  description?: string;
+  settings?: Settings;
+}
+
+const { title, description, settings = {} } = Astro.props;
+
+// Read settings values with sensible defaults
+const siteName = settings.site_name || "My Linktree";
+const metaTitle = title || settings.seo_title || siteName;
+const metaDescription = description || settings.seo_description || `Check out ${siteName}'s links and social profiles.`;
+const ogImage = settings.og_image || "";
+const favicon = settings.favicon || "/favicon.ico";
+const themeColor = settings.theme_color || "#0f172a"; // default to slate-900 bg
+const fontClass = settings.font_family ? `font-${settings.font_family}` : 'font-sans';
+---
+
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href={favicon} />
+    
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDescription} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDescription} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={metaTitle} />
+    <meta property="twitter:description" content={metaDescription} />
+    {ogImage && <meta property="twitter:image" content={ogImage} />}
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+    {settings.umami_id && settings.umami_url && (
+      <!-- Umami Analytics Integration -->
+      <script defer src={settings.umami_url} data-website-id={settings.umami_id}></script>
+    )}
+
+    <style define:vars={{ themeColor }}>
+      html, body {
+        background-color: var(--themeColor);
+      }
+    </style>
+  </head>
+  <body class={`h-full text-slate-100 antialiased ${fontClass}`}>
+    <slot />
+  </body>
+</html>

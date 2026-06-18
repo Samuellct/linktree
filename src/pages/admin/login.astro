@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { LoginCard } from '../../components/admin/LoginCard';
+import { hasAnyUsers } from '../../lib/db';
+import { verifySessionToken } from '../../lib/auth';
+
+const db = Astro.locals.runtime.env.DB;
+const secret = Astro.locals.runtime?.env?.JWT_SECRET || "dev-linktree-secret-key-987654321";
+
+// Check if user is already logged in
+const sessionCookie = Astro.cookies.get('admin_session')?.value;
+if (sessionCookie) {
+  const payload = await verifySessionToken(sessionCookie, secret);
+  if (payload) {
+    return Astro.redirect('/admin/dashboard');
+  }
+}
+
+// Check if any users exist (to decide if we show first-time setup or normal login)
+const usersExist = await hasAnyUsers(db);
+const isSetup = !usersExist;
+---
+
+<Layout title={isSetup ? "Configuration initiale" : "Connexion Administration"}>
+  <div class="min-h-screen flex items-center justify-center py-12 px-4 relative overflow-hidden bg-slate-950">
+    <!-- background styling -->
+    <div class="absolute inset-0 z-0 pointer-events-none opacity-20">
+      <div class="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] rounded-full bg-indigo-500 blur-[150px]"></div>
+      <div class="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] rounded-full bg-violet-600 blur-[150px]"></div>
+    </div>
+
+    <!-- Container -->
+    <div class="relative z-10 w-full flex justify-center">
+      <LoginCard client:load isSetup={isSetup} />
+    </div>
+  </div>
+</Layout>
