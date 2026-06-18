@@ -5,4 +5,4 @@ compatibility_flags = [ "global_fetch_strictly_public" ]
 [[d1_databases]]
 binding = "DB"
 database_name = "linktree_db"
-database_id = "local-d1-placeholder"
+database_id = "91d0e9c1-1958-41a5-bb47-c7f924605650"
