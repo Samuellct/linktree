@@ -35,6 +35,17 @@ export type Settings = Record<string, string>;
 
 // Safely retrieve D1 Database binding
 export function getDb(locals: any): D1Database | null {
+  console.log("[DEBUG getDb] locals keys:", Object.keys(locals || {}));
+  if (locals?.runtime) {
+    console.log("[DEBUG getDb] runtime keys:", Object.keys(locals.runtime));
+    try {
+      if (locals.runtime.env) {
+        console.log("[DEBUG getDb] env keys:", Object.keys(locals.runtime.env));
+      }
+    } catch (err: any) {
+      console.log("[DEBUG getDb] Error reading runtime.env:", err?.message || err);
+    }
+  }
   try {
     return locals?.runtime?.env?.DB || null;
   } catch (e) {
