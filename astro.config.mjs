@@ -8,7 +8,10 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   output: 'server',
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    optimizeDeps: {
+      exclude: ['lucide-react']
+    }
   },
   integrations: [react()],
   adapter: cloudflare({
