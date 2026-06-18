@@ -3,7 +3,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 import { SettingsEditor } from '../../components/admin/SettingsEditor';
 import { getSettings, getDb } from '../../lib/db';
 
-const db = getDb(Astro.locals);
+const db = getDb();
 
 // Fetch settings from database
 const settings = db ? await getSettings(db) : {};

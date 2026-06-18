@@ -3,7 +3,7 @@ import { updateSettings, getDb } from "../../lib/db";
 
 export const PUT: APIRoute = async ({ request, locals }) => {
   try {
-    const db = getDb(locals);
+    const db = getDb();
     if (!db) {
       return new Response(JSON.stringify({ error: "Base de données non disponible" }), { status: 500 });
     }

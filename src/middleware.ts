@@ -1,5 +1,6 @@
 import { defineMiddleware } from "astro:middleware";
 import { verifySessionToken } from "./lib/auth";
+import { env } from "cloudflare:workers";
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const url = new URL(context.request.url);
@@ -8,7 +9,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // Fetch secret from bindings or use fallback for dev
   let secret = "dev-linktree-secret-key-987654321";
   try {
-    const jwtSecret = context.locals.runtime?.env?.JWT_SECRET;
+    const jwtSecret = (env as any).JWT_SECRET;
     if (jwtSecret) {
       secret = jwtSecret;
     }

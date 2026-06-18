@@ -3,7 +3,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 import { DashboardStats } from '../../components/admin/DashboardStats';
 import { getAnalyticsStats, getSettings, getDb } from '../../lib/db';
 
-const db = getDb(Astro.locals);
+const db = getDb();
 
 // Fetch settings for Umami configuration
 const settings = db ? await getSettings(db) : {};

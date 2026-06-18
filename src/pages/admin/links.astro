@@ -3,7 +3,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 import { LinkEditor } from '../../components/admin/LinkEditor';
 import { getAllLinks, getDb } from '../../lib/db';
 
-const db = getDb(Astro.locals);
+const db = getDb();
 
 // Fetch links from database
 const links = db ? await getAllLinks(db) : [];

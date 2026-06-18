@@ -4,11 +4,13 @@ import { LoginCard } from '../../components/admin/LoginCard';
 import { hasAnyUsers, getDb } from '../../lib/db';
 import { verifySessionToken } from '../../lib/auth';
 
-const db = getDb(Astro.locals);
+import { env } from 'cloudflare:workers';
+
+const db = getDb();
 
 let secret = "dev-linktree-secret-key-987654321";
 try {
-  const jwtSecret = Astro.locals.runtime?.env?.JWT_SECRET;
+  const jwtSecret = (env as any).JWT_SECRET;
   if (jwtSecret) {
     secret = jwtSecret;
   }

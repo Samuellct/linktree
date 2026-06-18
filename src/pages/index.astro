@@ -6,7 +6,7 @@ import { PreviewCard } from '../components/PreviewCard';
 import * as LucideIcons from 'lucide-react';
 
 // Connect to D1 database safely
-const db = getDb(Astro.locals);
+const db = getDb();
 
 // Fetch settings and links from database
 const settings = db ? await getSettings(db) : {};

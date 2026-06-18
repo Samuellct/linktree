@@ -33,21 +33,12 @@ export interface AnalyticsStats {
 // - site_name, bio, avatar, theme_color, custom_css, font_family, animations_enabled (0/1), umami_id, umami_url, seo_title, seo_description, og_image, favicon, social_github, social_twitter, social_linkedin, social_instagram, social_youtube
 export type Settings = Record<string, string>;
 
+import { env } from "cloudflare:workers";
+
 // Safely retrieve D1 Database binding
-export function getDb(locals: any): D1Database | null {
-  console.log("[DEBUG getDb] locals keys:", Object.keys(locals || {}));
-  if (locals?.runtime) {
-    console.log("[DEBUG getDb] runtime keys:", Object.keys(locals.runtime));
-    try {
-      if (locals.runtime.env) {
-        console.log("[DEBUG getDb] env keys:", Object.keys(locals.runtime.env));
-      }
-    } catch (err: any) {
-      console.log("[DEBUG getDb] Error reading runtime.env:", err?.message || err);
-    }
-  }
+export function getDb(): D1Database | null {
   try {
-    return locals?.runtime?.env?.DB || null;
+    return (env as any).DB || null;
   } catch (e) {
     return null;
   }

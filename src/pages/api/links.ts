@@ -2,7 +2,7 @@ import { getAllLinks, createLink, updateLink, deleteLink, reorderLinks, getDb } 
 
 export const GET: APIRoute = async ({ locals }) => {
   try {
-    const db = getDb(locals);
+    const db = getDb();
     if (!db) {
       return new Response(JSON.stringify({ error: "Base de données non disponible" }), { status: 500 });
     }
@@ -18,7 +18,7 @@ export const GET: APIRoute = async ({ locals }) => {
 
 export const POST: APIRoute = async ({ request, locals }) => {
   try {
-    const db = getDb(locals);
+    const db = getDb();
     if (!db) {
       return new Response(JSON.stringify({ error: "Base de données non disponible" }), { status: 500 });
     }
@@ -52,7 +52,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
 export const PUT: APIRoute = async ({ request, locals }) => {
   try {
-    const db = getDb(locals);
+    const db = getDb();
     if (!db) {
       return new Response(JSON.stringify({ error: "Base de données non disponible" }), { status: 500 });
     }
@@ -97,7 +97,7 @@ export const PUT: APIRoute = async ({ request, locals }) => {
 
 export const DELETE: APIRoute = async ({ request, locals, url }) => {
   try {
-    const db = getDb(locals);
+    const db = getDb();
     if (!db) {
       return new Response(JSON.stringify({ error: "Base de données non disponible" }), { status: 500 });
     }

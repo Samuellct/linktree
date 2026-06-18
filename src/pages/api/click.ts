@@ -4,7 +4,7 @@ import { parseUserAgent } from "../../lib/utils";
 
 export const GET: APIRoute = async ({ request, locals, url }) => {
   try {
-    const db = getDb(locals);
+    const db = getDb();
     if (!db) {
       return Response.redirect(new URL("/", request.url), 302);
     }

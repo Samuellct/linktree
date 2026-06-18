@@ -4,7 +4,7 @@ import { hashPassword, verifyPassword, createSessionToken } from "../../lib/auth
 
 export const POST: APIRoute = async ({ request, cookies, locals }) => {
   try {
-    const db = getDb(locals);
+    const db = getDb();
     if (!db) {
       return new Response(JSON.stringify({ error: "Base de données non disponible" }), { status: 500 });
     }
