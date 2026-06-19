@@ -58,61 +58,56 @@ const activeSocials = socials
 ---
 
 <Layout settings={settings}>
-  <div class="min-h-screen flex flex-col justify-between py-12 px-4 relative overflow-hidden bg-slate-950">
+  <div class="min-h-screen flex flex-col justify-between py-16 px-4 relative overflow-hidden">
     
-    <!-- Premium background elements -->
-    <div class="absolute inset-0 z-0 pointer-events-none opacity-20">
-      <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500 blur-[120px]"></div>
-      <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-violet-600 blur-[120px]"></div>
-    </div>
-
     <!-- Main Content Card -->
     <div class="max-w-md w-full mx-auto z-10 text-center flex-grow flex flex-col justify-center">
       
       <!-- Profile Header -->
-      <div class="mb-8">
+      <div class="mb-10">
         <div class="relative inline-block">
           {avatar ? (
-            <img 
-              src={avatar} 
-              alt={siteName} 
-              class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-indigo-500/50 shadow-xl"
-            />
+            <div class="w-20 h-20 mx-auto mb-4 border border-current p-1">
+              <img 
+                src={avatar} 
+                alt={siteName} 
+                class="w-full h-full object-cover grayscale"
+              />
+            </div>
           ) : (
-            <div class="w-24 h-24 rounded-full mx-auto bg-slate-800 border-2 border-indigo-500/30 flex items-center justify-center text-slate-400">
-              <LucideIcons.User className="w-12 h-12" />
+            <div class="w-16 h-16 mx-auto mb-4 border border-current flex items-center justify-center text-current/60">
+              <LucideIcons.User className="w-8 h-8" />
             </div>
           )}
-          <div class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-green-500 border-2 border-slate-950"></div>
         </div>
 
-        <h1 class="text-2xl font-bold text-white mt-4 tracking-tight">
+        <h1 class="text-3xl font-bold mt-4 tracking-tight font-serif-title">
           {siteName}
         </h1>
         {bio && (
-          <p class="text-sm text-slate-400 mt-2 max-w-sm mx-auto px-4 font-light">
+          <p class="text-sm mt-3 max-w-xs mx-auto px-2 leading-relaxed opacity-75 font-light">
             {bio}
           </p>
         )}
       </div>
 
-      <!-- Social Icons -->
+      <!-- Social Links Bar (Editorial Print style) -->
       {activeSocials.length > 0 && (
-        <div class="flex justify-center gap-4 mb-8">
-          {activeSocials.map(social => {
-            const IconComponent = (LucideIcons as any)[social.icon] || LucideIcons.Globe;
-            return (
+        <div class="flex justify-center flex-wrap gap-4 mb-10 border-b border-current/15 pb-6 text-xs uppercase tracking-wider font-semibold">
+          {activeSocials.map((social, idx) => (
+            <>
+              {idx > 0 && <span class="opacity-30 select-none">•</span>}
               <a 
                 href={social.url} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                class="p-2.5 rounded-xl bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/50 text-slate-400 hover:text-white transition-all duration-200 hover:-translate-y-0.5"
+                class="hover:opacity-60 transition-opacity"
                 aria-label={social.label}
               >
-                <IconComponent className="w-5 h-5" />
+                {social.label}
               </a>
-            );
-          })}
+            </>
+          ))}
         </div>
       )}
 
@@ -133,8 +128,8 @@ const activeSocials = socials
             />
           ))
         ) : (
-          <div class="py-8 px-4 rounded-2xl border border-dashed border-slate-800 text-slate-500 text-sm">
-            Aucun lien disponible pour le moment.
+          <div class="py-12 px-4 border border-dashed border-current/20 text-current/50 text-xs font-mono">
+            [Aucun lien disponible pour le moment]
           </div>
         )}
       </div>
@@ -142,16 +137,16 @@ const activeSocials = socials
     </div>
 
     <!-- Page Footer & Secret Admin Access -->
-    <footer class="z-10 text-center pt-8 text-xs text-slate-600 flex justify-between items-center max-w-md w-full mx-auto px-4">
+    <footer class="z-10 text-center pt-12 text-[10px] tracking-widest uppercase opacity-60 flex justify-between items-center max-w-md w-full mx-auto px-4 mt-8 border-t border-current/15">
       <span>Propulsé par Antigravity</span>
       
       <!-- Discrete admin login gear button -->
       <a 
         href="/admin/dashboard" 
-        class="p-1.5 rounded-lg text-slate-700 hover:text-slate-500 hover:bg-slate-900/20 transition-all duration-200"
+        class="hover:opacity-60 transition-opacity"
         aria-label="Accès administration"
       >
-        <LucideIcons.Settings className="w-4 h-4" />
+        ❖
       </a>
     </footer>
 

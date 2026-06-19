@@ -26,9 +26,10 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
   const [socialYoutube, setSocialYoutube] = useState(settings.social_youtube || "");
 
   // Appearance fields
-  const [themeColor, setThemeColor] = useState(settings.theme_color || "#0f172a");
-  const [fontFamily, setFontFamily] = useState(settings.font_family || "sans");
+  const [themeColor, setThemeColor] = useState(settings.theme_color || "#ffffff");
+  const [fontFamily, setFontFamily] = useState(settings.font_family || "serif");
   const [animationsEnabled, setAnimationsEnabled] = useState(settings.animations_enabled !== "0");
+  const [themeStyle, setThemeStyle] = useState(settings.theme_style || "light");
 
   // SEO fields
   const [seoTitle, setSeoTitle] = useState(settings.seo_title || "");
@@ -118,6 +119,7 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
       favicon,
       umami_id: umamiId,
       umami_url: umamiUrl,
+      theme_style: themeStyle,
     };
 
     try {
@@ -285,39 +287,46 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
               <div className="space-y-6">
                 <h3 className="text-md font-bold text-white border-b border-slate-800 pb-3">Apparence Visuelle</h3>
                 
-                {/* Background color */}
+                {/* Visual Theme Selection */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Couleur de fond du site</label>
-                  <div className="flex gap-3 max-w-sm">
-                    <input
-                      type="color"
-                      value={themeColor}
-                      onChange={(e) => setThemeColor(e.target.value)}
-                      className="w-12 h-12 rounded-xl bg-slate-950/50 border border-slate-800 cursor-pointer overflow-hidden p-0"
-                    />
-                    <input
-                      type="text"
-                      value={themeColor}
-                      onChange={(e) => setThemeColor(e.target.value)}
-                      placeholder="#0f172a"
-                      className="w-full px-4 py-2 rounded-xl bg-slate-950/50 border border-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
-                    />
-                  </div>
-                </div>
+                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Déclinaison Galerie Éditoriale</label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md">
+                    {/* Light option */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setThemeStyle("light");
+                        setThemeColor("#ffffff");
+                        setFontFamily("serif");
+                      }}
+                      className={`p-4 border text-left cursor-pointer transition-all ${
+                        themeStyle === "light"
+                          ? "border-indigo-500 bg-indigo-950/20 text-white"
+                          : "border-slate-800 bg-slate-950/40 text-slate-400 hover:border-slate-700 hover:text-white"
+                      }`}
+                    >
+                      <div className="font-bold text-sm">Mode Clair (Galerie Claire)</div>
+                      <div className="text-[11px] text-slate-500 mt-1">Fond blanc pur mat, contrastes d'encre noire. Minimaliste et élégant.</div>
+                    </button>
 
-                {/* Typography family */}
-                <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Police d'écriture</label>
-                  <select
-                    value={fontFamily}
-                    onChange={(e) => setFontFamily(e.target.value)}
-                    className="w-full max-w-sm px-3 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
-                  >
-                    <option value="sans" className="bg-slate-950">Inter (Sans-serif Moderne)</option>
-                    <option value="outfit" className="bg-slate-950">Outfit (Rond & Premium)</option>
-                    <option value="serif" className="bg-slate-950">Playfair Display (Serif Classique)</option>
-                    <option value="mono" className="bg-slate-950">Fira Code (Code/Monospace)</option>
-                  </select>
+                    {/* Dark option */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setThemeStyle("dark");
+                        setThemeColor("#0c0c0e");
+                        setFontFamily("serif");
+                      }}
+                      className={`p-4 border text-left cursor-pointer transition-all ${
+                        themeStyle === "dark"
+                          ? "border-indigo-500 bg-indigo-950/20 text-white"
+                          : "border-slate-800 bg-slate-950/40 text-slate-400 hover:border-slate-700 hover:text-white"
+                      }`}
+                    >
+                      <div className="font-bold text-sm">Mode Sombre (Galerie Sombre)</div>
+                      <div className="text-[11px] text-slate-500 mt-1">Fond noir mat profond, contrastes de lin blanc cassé. Doux pour les yeux.</div>
+                    </button>
+                  </div>
                 </div>
 
                 {/* Micro-animations flag */}
@@ -330,7 +339,7 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
                     className="rounded bg-slate-950 border-slate-800 text-indigo-600 focus:ring-indigo-500/50 w-4 h-4"
                   />
                   <label htmlFor="animationCheck" className="text-sm font-medium text-slate-300">
-                    Activer les micro-animations et effets visuels premium
+                    Activer les transitions animées douces au survol
                   </label>
                 </div>
               </div>
