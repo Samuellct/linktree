@@ -56,7 +56,12 @@ if (!settings.theme_style && settings.theme_color) {
 
     {settings.umami_id && settings.umami_url && (
       <!-- Umami Analytics Integration (Proxied to bypass ad-blockers) -->
-      <script defer src="/stats.js" data-website-id={settings.umami_id}></script>
+      <script 
+        defer 
+        src="/stats.js" 
+        data-website-id={settings.umami_id}
+        data-host-url={Astro.url.origin}
+      ></script>
     )}
   </head>
   <body class={`h-full antialiased theme-${themeStyle}`}>
