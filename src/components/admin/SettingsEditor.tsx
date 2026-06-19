@@ -522,9 +522,12 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
                     type="url"
                     value={umamiUrl}
                     onChange={(e) => setUmamiUrl(e.target.value)}
-                    placeholder="https://analytics.umami.is/script.js"
+                    placeholder="https://cloud.umami.is/script.js"
                     className="w-full px-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm font-sans"
                   />
+                  <p className="text-[11px] text-slate-500 mt-1.5 font-sans leading-normal">
+                    L'adresse de script fournie dans l'attribut <code>src</code> de votre code de suivi (ex : <code>https://cloud.umami.is/script.js</code>).
+                  </p>
                 </div>
 
                 <div>
@@ -536,6 +539,9 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
                     placeholder="xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
                     className="w-full px-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm font-sans"
                   />
+                  <p className="text-[11px] text-slate-500 mt-1.5 font-sans leading-normal">
+                    La clé de l'attribut <code>data-website-id</code> dans votre code de suivi (ex : <code>4e6253d7-ca41-4fee-9dc9-cb245caac372</code>).
+                  </p>
                 </div>
               </div>
             )}

@@ -18,8 +18,17 @@ export const DashboardStats: React.FC<DashboardStatsProps> = ({ stats, umamiUrl,
   const hasUmami = !!(umamiUrl && umamiId);
   // Extrapolate dashboard link if possible or open user-configured dashboard url
   const openUmamiDashboard = () => {
-    if (hasUmami) {
-      window.open(umamiUrl || "", "_blank", "noopener,noreferrer");
+    if (hasUmami && umamiUrl) {
+      let dashUrl = umamiUrl.trim();
+      if (dashUrl.endsWith("/")) {
+        dashUrl = dashUrl.slice(0, -1);
+      }
+      if (dashUrl.endsWith("/script.js")) {
+        dashUrl = dashUrl.slice(0, -10);
+      } else if (dashUrl.endsWith("/umami.js")) {
+        dashUrl = dashUrl.slice(0, -9);
+      }
+      window.open(dashUrl, "_blank", "noopener,noreferrer");
     }
   };
 
