@@ -55,8 +55,8 @@ if (!settings.theme_style && settings.theme_color) {
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
 
     {settings.umami_id && settings.umami_url && (
-      <!-- Umami Analytics Integration -->
-      <script defer src={settings.umami_url} data-website-id={settings.umami_id}></script>
+      <!-- Umami Analytics Integration (Proxied to bypass ad-blockers) -->
+      <script defer src="/stats.js" data-website-id={settings.umami_id}></script>
     )}
   </head>
   <body class={`h-full antialiased theme-${themeStyle}`}>
