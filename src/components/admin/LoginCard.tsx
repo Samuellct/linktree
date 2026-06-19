@@ -58,19 +58,19 @@ export const LoginCard: React.FC<LoginCardProps> = ({ isSetup }) => {
   };
 
   return (
-    <div className="w-full max-w-md p-8 rounded-3xl bg-slate-900/40 border border-slate-800/80 shadow-2xl glassmorphism text-left">
+    <div className="w-full max-w-md p-8 bg-slate-950 border border-slate-800 text-left rounded-none shadow-none font-serif">
       <div className="mb-8 text-center">
-        <div className="inline-flex p-3 rounded-2xl bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 mb-4">
+        <div className="inline-flex p-3 border border-slate-800 text-slate-400 mb-4 rounded-none">
           {isSetup ? (
-            <LucideIcons.ShieldAlert className="w-8 h-8" />
+            <LucideIcons.ShieldAlert className="w-6 h-6" />
           ) : (
-            <LucideIcons.Lock className="w-8 h-8" />
+            <LucideIcons.Lock className="w-6 h-6" />
           )}
         </div>
-        <h2 className="text-2xl font-bold text-white tracking-tight">
+        <h2 className="text-2xl font-bold text-white tracking-tight font-serif-title">
           {isSetup ? "Configuration initiale" : "Espace Administration"}
         </h2>
-        <p className="text-sm text-slate-400 mt-2 font-light">
+        <p className="text-xs text-slate-400 mt-2 font-light leading-relaxed">
           {isSetup
             ? "Créez votre compte administrateur pour configurer votre landing page."
             : "Connectez-vous pour configurer vos liens et voir les statistiques."}
@@ -78,24 +78,24 @@ export const LoginCard: React.FC<LoginCardProps> = ({ isSetup }) => {
       </div>
 
       {error && (
-        <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200 text-sm flex items-start space-x-3">
-          <LucideIcons.AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-          <span>{error}</span>
+        <div className="mb-6 p-4 bg-red-950/20 border border-red-900/50 text-red-300 text-xs flex items-start space-x-3 rounded-none">
+          <LucideIcons.AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+          <span className="font-sans">{error}</span>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Adresse email</label>
+          <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Adresse email</label>
           <div className="relative">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500">
-              <LucideIcons.Mail className="w-5 h-5" />
+              <LucideIcons.Mail className="w-4 h-4" />
             </span>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"
+              className="w-full pl-10 pr-4 py-2.5 bg-slate-900 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 transition-colors text-sm rounded-none font-sans"
               placeholder="admin@monadresse.com"
               required
             />
@@ -103,16 +103,16 @@ export const LoginCard: React.FC<LoginCardProps> = ({ isSetup }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Mot de passe</label>
+          <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Mot de passe</label>
           <div className="relative">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500">
-              <LucideIcons.KeyRound className="w-5 h-5" />
+              <LucideIcons.KeyRound className="w-4 h-4" />
             </span>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"
+              className="w-full pl-10 pr-4 py-2.5 bg-slate-900 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 transition-colors text-sm rounded-none font-sans"
               placeholder="••••••••••••"
               required
             />
@@ -121,16 +121,16 @@ export const LoginCard: React.FC<LoginCardProps> = ({ isSetup }) => {
 
         {isSetup && (
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Confirmer le mot de passe</label>
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Confirmer le mot de passe</label>
             <div className="relative">
               <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500">
-                <LucideIcons.CheckCircle2 className="w-5 h-5" />
+                <LucideIcons.CheckCircle2 className="w-4 h-4" />
               </span>
               <input
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-900 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 transition-colors text-sm rounded-none font-sans"
                 placeholder="••••••••••••"
                 required
               />
@@ -141,10 +141,10 @@ export const LoginCard: React.FC<LoginCardProps> = ({ isSetup }) => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:ring-offset-2 focus:ring-offset-slate-950 flex justify-center items-center gap-2 border border-indigo-500/20 shadow-lg shadow-indigo-600/10 cursor-pointer disabled:opacity-50"
+          className="w-full py-3 px-4 bg-white hover:bg-slate-200 text-black font-bold text-sm transition-colors duration-200 focus:outline-none flex justify-center items-center gap-2 border border-white rounded-none cursor-pointer disabled:opacity-50 font-serif-title"
         >
           {loading ? (
-            <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+            <svg className="animate-spin h-5 w-5 text-black" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
             </svg>

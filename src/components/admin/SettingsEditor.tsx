@@ -148,22 +148,22 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
   return (
     <div className="space-y-8 text-left max-w-4xl">
       <div>
-        <h1 className="text-3xl font-bold text-white tracking-tight font-sans">Configuration du Site</h1>
+        <h1 className="text-3xl font-bold text-white tracking-tight font-serif-title border-b border-slate-800 pb-6 mb-2">Configuration du Site</h1>
         <p className="text-sm text-slate-400 mt-1">Personnalisez votre profil, l'apparence visuelle, le SEO et le tracking.</p>
       </div>
 
       {/* ALERTS */}
       {successMsg && (
-        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-sm flex items-start space-x-3">
+        <div className="p-4 rounded-none bg-emerald-950/20 border border-emerald-900/50 text-emerald-300 text-sm flex items-start space-x-3">
           <LucideIcons.CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" />
-          <span>{successMsg}</span>
+          <span className="font-sans">{successMsg}</span>
         </div>
       )}
 
       {errorMsg && (
-        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200 text-sm flex items-start space-x-3">
+        <div className="p-4 rounded-none bg-red-950/20 border border-red-900/50 text-red-300 text-sm flex items-start space-x-3">
           <LucideIcons.AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-          <span>{errorMsg}</span>
+          <span className="font-sans">{errorMsg}</span>
         </div>
       )}
 
@@ -174,8 +174,8 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
         <div className="md:col-span-1 flex flex-col space-y-1">
           <button
             onClick={() => setActiveTab("profile")}
-            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-left cursor-pointer ${
-              activeTab === "profile" ? "bg-slate-900 text-indigo-400 border-l-2 border-indigo-500" : "text-slate-400 hover:bg-slate-900/40 hover:text-white"
+            className={`flex items-center gap-3 px-4 py-3 rounded-none text-sm font-semibold uppercase tracking-wider transition-all text-left cursor-pointer border-l-2 ${
+              activeTab === "profile" ? "bg-slate-900 text-white border-white" : "text-slate-400 border-transparent hover:bg-slate-900/40 hover:text-white"
             }`}
           >
             <LucideIcons.User className="w-4 h-4" />
@@ -184,8 +184,8 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
           
           <button
             onClick={() => setActiveTab("appearance")}
-            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-left cursor-pointer ${
-              activeTab === "appearance" ? "bg-slate-900 text-indigo-400 border-l-2 border-indigo-500" : "text-slate-400 hover:bg-slate-900/40 hover:text-white"
+            className={`flex items-center gap-3 px-4 py-3 rounded-none text-sm font-semibold uppercase tracking-wider transition-all text-left cursor-pointer border-l-2 ${
+              activeTab === "appearance" ? "bg-slate-900 text-white border-white" : "text-slate-400 border-transparent hover:bg-slate-900/40 hover:text-white"
             }`}
           >
             <LucideIcons.Palette className="w-4 h-4" />
@@ -194,8 +194,8 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
 
           <button
             onClick={() => setActiveTab("social")}
-            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-left cursor-pointer ${
-              activeTab === "social" ? "bg-slate-900 text-indigo-400 border-l-2 border-indigo-500" : "text-slate-400 hover:bg-slate-900/40 hover:text-white"
+            className={`flex items-center gap-3 px-4 py-3 rounded-none text-sm font-semibold uppercase tracking-wider transition-all text-left cursor-pointer border-l-2 ${
+              activeTab === "social" ? "bg-slate-900 text-white border-white" : "text-slate-400 border-transparent hover:bg-slate-900/40 hover:text-white"
             }`}
           >
             <LucideIcons.Share2 className="w-4 h-4" />
@@ -204,8 +204,8 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
 
           <button
             onClick={() => setActiveTab("seo")}
-            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-left cursor-pointer ${
-              activeTab === "seo" ? "bg-slate-900 text-indigo-400 border-l-2 border-indigo-500" : "text-slate-400 hover:bg-slate-900/40 hover:text-white"
+            className={`flex items-center gap-3 px-4 py-3 rounded-none text-sm font-semibold uppercase tracking-wider transition-all text-left cursor-pointer border-l-2 ${
+              activeTab === "seo" ? "bg-slate-900 text-white border-white" : "text-slate-400 border-transparent hover:bg-slate-900/40 hover:text-white"
             }`}
           >
             <LucideIcons.Globe className="w-4 h-4" />
@@ -214,8 +214,8 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
 
           <button
             onClick={() => setActiveTab("analytics")}
-            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-left cursor-pointer ${
-              activeTab === "analytics" ? "bg-slate-900 text-indigo-400 border-l-2 border-indigo-500" : "text-slate-400 hover:bg-slate-900/40 hover:text-white"
+            className={`flex items-center gap-3 px-4 py-3 rounded-none text-sm font-semibold uppercase tracking-wider transition-all text-left cursor-pointer border-l-2 ${
+              activeTab === "analytics" ? "bg-slate-900 text-white border-white" : "text-slate-400 border-transparent hover:bg-slate-900/40 hover:text-white"
             }`}
           >
             <LucideIcons.LineChart className="w-4 h-4" />
@@ -224,20 +224,20 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
         </div>
 
         {/* Form panel */}
-        <div className="md:col-span-3 p-6 rounded-2xl bg-slate-900/40 border border-slate-950/60 shadow-xl glassmorphism">
+        <div className="md:col-span-3 p-6 rounded-none bg-slate-950 border border-slate-800">
           <form onSubmit={handleSave} className="space-y-6">
             
             {/* TAB: PROFILE */}
             {activeTab === "profile" && (
               <div className="space-y-6">
-                <h3 className="text-md font-bold text-white border-b border-slate-800 pb-3">Informations de Profil</h3>
+                <h3 className="text-md font-bold text-white border-b border-slate-800 pb-3 font-serif-title">Informations de Profil</h3>
                 
                 {/* Avatar upload */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Photo de profil</label>
+                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Photo de profil</label>
                   <div className="flex items-center space-x-6">
                     {avatar ? (
-                      <div className="relative w-20 h-20 rounded-full overflow-hidden border border-slate-800">
+                      <div className="relative w-20 h-20 rounded-none overflow-hidden border border-slate-800">
                         <img src={avatar} alt="Avatar" className="w-full h-full object-cover" />
                         <button
                           type="button"
@@ -248,35 +248,35 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
                         </button>
                       </div>
                     ) : (
-                      <label className="w-20 h-20 rounded-full border border-dashed border-slate-800 hover:border-indigo-500/50 flex flex-col items-center justify-center text-slate-600 hover:text-indigo-400 cursor-pointer">
+                      <label className="w-20 h-20 rounded-none border border-dashed border-slate-800 hover:border-slate-650 flex flex-col items-center justify-center text-slate-600 hover:text-white cursor-pointer">
                         <LucideIcons.UserPlus className="w-5 h-5" />
-                        <span className="text-[10px] mt-1">Ajouter</span>
+                        <span className="text-[10px] mt-1 font-sans">Ajouter</span>
                         <input type="file" accept="image/*" onChange={handleAvatarUpload} className="hidden" />
                       </label>
                     )}
-                    <span className="text-xs text-slate-500">Sélectionnez un fichier PNG ou JPG. La photo sera automatiquement redimensionnée.</span>
+                    <span className="text-xs text-slate-500 font-sans">Sélectionnez un fichier PNG ou JPG. La photo sera automatiquement redimensionnée.</span>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Nom affiché</label>
+                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Nom affiché</label>
                   <input
                     type="text"
                     value={siteName}
                     onChange={(e) => setSiteName(e.target.value)}
                     placeholder="Mon Pseudo"
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
+                    className="w-full px-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm font-sans"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Biographie courte</label>
+                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Biographie courte</label>
                   <textarea
                     value={bio}
                     onChange={(e) => setBio(e.target.value)}
                     placeholder="Présentez-vous en quelques mots..."
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm h-28 resize-none"
+                    className="w-full px-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm h-28 resize-none font-sans"
                   />
                 </div>
               </div>
@@ -285,11 +285,11 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
             {/* TAB: APPEARANCE */}
             {activeTab === "appearance" && (
               <div className="space-y-6">
-                <h3 className="text-md font-bold text-white border-b border-slate-800 pb-3">Apparence Visuelle</h3>
+                <h3 className="text-md font-bold text-white border-b border-slate-800 pb-3 font-serif-title">Apparence Visuelle</h3>
                 
                 {/* Visual Theme Selection */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Déclinaison Galerie Éditoriale</label>
+                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Déclinaison Galerie Éditoriale</label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md">
                     {/* Light option */}
                     <button
@@ -299,14 +299,14 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
                         setThemeColor("#ffffff");
                         setFontFamily("serif");
                       }}
-                      className={`p-4 border text-left cursor-pointer transition-all ${
+                      className={`p-4 border text-left cursor-pointer transition-all rounded-none ${
                         themeStyle === "light"
-                          ? "border-indigo-500 bg-indigo-950/20 text-white"
+                          ? "border-white bg-slate-900 text-white"
                           : "border-slate-800 bg-slate-950/40 text-slate-400 hover:border-slate-700 hover:text-white"
                       }`}
                     >
-                      <div className="font-bold text-sm">Mode Clair (Galerie Claire)</div>
-                      <div className="text-[11px] text-slate-500 mt-1">Fond blanc pur mat, contrastes d'encre noire. Minimaliste et élégant.</div>
+                      <div className="font-bold text-sm font-serif-title">Mode Clair (Galerie Claire)</div>
+                      <div className="text-[11px] text-slate-500 mt-1 font-sans">Fond blanc pur mat, contrastes d'encre noire. Minimaliste et élégant.</div>
                     </button>
 
                     {/* Dark option */}
@@ -317,14 +317,14 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
                         setThemeColor("#0c0c0e");
                         setFontFamily("serif");
                       }}
-                      className={`p-4 border text-left cursor-pointer transition-all ${
+                      className={`p-4 border text-left cursor-pointer transition-all rounded-none ${
                         themeStyle === "dark"
-                          ? "border-indigo-500 bg-indigo-950/20 text-white"
+                          ? "border-white bg-slate-900 text-white"
                           : "border-slate-800 bg-slate-950/40 text-slate-400 hover:border-slate-700 hover:text-white"
                       }`}
                     >
-                      <div className="font-bold text-sm">Mode Sombre (Galerie Sombre)</div>
-                      <div className="text-[11px] text-slate-500 mt-1">Fond noir mat profond, contrastes de lin blanc cassé. Doux pour les yeux.</div>
+                      <div className="font-bold text-sm font-serif-title">Mode Sombre (Galerie Sombre)</div>
+                      <div className="text-[11px] text-slate-500 mt-1 font-sans">Fond noir mat profond, contrastes de lin blanc cassé. Doux pour les yeux.</div>
                     </button>
                   </div>
                 </div>
@@ -336,9 +336,9 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
                     id="animationCheck"
                     checked={animationsEnabled}
                     onChange={(e) => setAnimationsEnabled(e.target.checked)}
-                    className="rounded bg-slate-950 border-slate-800 text-indigo-600 focus:ring-indigo-500/50 w-4 h-4"
+                    className="rounded-none bg-slate-950 border-slate-800 text-white focus:ring-0 focus:ring-offset-0 w-4 h-4"
                   />
-                  <label htmlFor="animationCheck" className="text-sm font-medium text-slate-300">
+                  <label htmlFor="animationCheck" className="text-sm font-medium text-slate-300 font-sans">
                     Activer les transitions animées douces au survol
                   </label>
                 </div>
@@ -348,80 +348,80 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
             {/* TAB: SOCIAL */}
             {activeTab === "social" && (
               <div className="space-y-5">
-                <h3 className="text-md font-bold text-white border-b border-slate-800 pb-3">Réseaux Sociaux principaux</h3>
+                <h3 className="text-md font-bold text-white border-b border-slate-800 pb-3 font-serif-title">Réseaux Sociaux principaux</h3>
                 
                 <div className="space-y-4">
                   {/* GitHub */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 mb-2">Pseudo GitHub</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-2 font-sans">Pseudo GitHub</label>
                     <div className="relative">
-                      <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 text-xs">github.com/</span>
+                      <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 text-xs font-sans">github.com/</span>
                       <input
                         type="text"
                         value={socialGithub}
                         onChange={(e) => setSocialGithub(e.target.value)}
                         placeholder="pseudo"
-                        className="w-full pl-24 pr-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
+                        className="w-full pl-24 pr-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm font-sans"
                       />
                     </div>
                   </div>
 
                   {/* Twitter */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 mb-2">Pseudo Twitter / X</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-2 font-sans">Pseudo Twitter / X</label>
                     <div className="relative">
-                      <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 text-xs">twitter.com/</span>
+                      <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 text-xs font-sans">twitter.com/</span>
                       <input
                         type="text"
                         value={socialTwitter}
                         onChange={(e) => setSocialTwitter(e.target.value)}
                         placeholder="pseudo"
-                        className="w-full pl-24 pr-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
+                        className="w-full pl-24 pr-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm font-sans"
                       />
                     </div>
                   </div>
 
                   {/* LinkedIn */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 mb-2">Lien LinkedIn</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-2 font-sans">Lien LinkedIn</label>
                     <div className="relative">
-                      <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 text-xs">linkedin.com/in/</span>
+                      <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 text-xs font-sans">linkedin.com/in/</span>
                       <input
                         type="text"
                         value={socialLinkedin}
                         onChange={(e) => setSocialLinkedin(e.target.value)}
                         placeholder="profile"
-                        className="w-full pl-32 pr-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
+                        className="w-full pl-32 pr-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm font-sans"
                       />
                     </div>
                   </div>
 
                   {/* Instagram */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 mb-2">Pseudo Instagram</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-2 font-sans">Pseudo Instagram</label>
                     <div className="relative">
-                      <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 text-xs">instagram.com/</span>
+                      <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 text-xs font-sans">instagram.com/</span>
                       <input
                         type="text"
                         value={socialInstagram}
                         onChange={(e) => setSocialInstagram(e.target.value)}
                         placeholder="pseudo"
-                        className="w-full pl-28 pr-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
+                        className="w-full pl-28 pr-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm font-sans"
                       />
                     </div>
                   </div>
 
                   {/* YouTube */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 mb-2">Chaîne YouTube</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-2 font-sans">Chaîne YouTube</label>
                     <div className="relative">
-                      <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 text-xs">youtube.com/</span>
+                      <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 text-xs font-sans">youtube.com/</span>
                       <input
                         type="text"
                         value={socialYoutube}
                         onChange={(e) => setSocialYoutube(e.target.value)}
                         placeholder="c/chaine"
-                        className="w-full pl-28 pr-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
+                        className="w-full pl-28 pr-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm font-sans"
                       />
                     </div>
                   </div>
@@ -432,36 +432,36 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
             {/* TAB: SEO */}
             {activeTab === "seo" && (
               <div className="space-y-6">
-                <h3 className="text-md font-bold text-white border-b border-slate-800 pb-3">Référencement et Meta-données</h3>
+                <h3 className="text-md font-bold text-white border-b border-slate-800 pb-3 font-serif-title">Référencement et Meta-données</h3>
                 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Titre de page (Meta Title)</label>
+                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Titre de page (Meta Title)</label>
                   <input
                     type="text"
                     value={seoTitle}
                     onChange={(e) => setSeoTitle(e.target.value)}
                     placeholder="ex: Jean Dupont - Développeur Fullstack"
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
+                    className="w-full px-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm font-sans"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Description de page (Meta Description)</label>
+                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Description de page (Meta Description)</label>
                   <textarea
                     value={seoDescription}
                     onChange={(e) => setSeoDescription(e.target.value)}
                     placeholder="Description affichée dans les résultats de recherche Google..."
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm h-24 resize-none"
+                    className="w-full px-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm h-24 resize-none font-sans"
                   />
                 </div>
 
                 {/* Favicon & OG uploads */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Favicon du site</label>
+                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Favicon du site</label>
                     <div className="flex items-center space-x-4">
                       {favicon ? (
-                        <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-slate-800 p-2 bg-slate-950">
+                        <div className="relative w-12 h-12 rounded-none overflow-hidden border border-slate-800 p-2 bg-slate-950">
                           <img src={favicon} alt="Favicon" className="w-full h-full object-contain" />
                           <button
                             type="button"
@@ -472,20 +472,20 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
                           </button>
                         </div>
                       ) : (
-                        <label className="w-12 h-12 rounded-lg border border-dashed border-slate-800 hover:border-indigo-500/50 flex flex-col items-center justify-center text-slate-600 hover:text-indigo-400 cursor-pointer">
+                        <label className="w-12 h-12 rounded-none border border-dashed border-slate-800 hover:border-slate-650 flex flex-col items-center justify-center text-slate-600 hover:text-white cursor-pointer">
                           <LucideIcons.Upload className="w-4 h-4" />
                           <input type="file" accept="image/*" onChange={handleFaviconUpload} className="hidden" />
                         </label>
                       )}
-                      <span className="text-[10px] text-slate-500 leading-tight">Format ICO ou PNG (max 64x64)</span>
+                      <span className="text-[10px] text-slate-500 leading-tight font-sans">Format ICO ou PNG (max 64x64)</span>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Image Open Graph (OG Share)</label>
+                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Image Open Graph (OG Share)</label>
                     <div className="flex items-center space-x-4">
                       {ogImage ? (
-                        <div className="relative w-24 h-12 rounded-lg overflow-hidden border border-slate-800">
+                        <div className="relative w-24 h-12 rounded-none overflow-hidden border border-slate-800">
                           <img src={ogImage} alt="OG" className="w-full h-full object-cover" />
                           <button
                             type="button"
@@ -496,12 +496,12 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
                           </button>
                         </div>
                       ) : (
-                        <label className="w-24 h-12 rounded-lg border border-dashed border-slate-800 hover:border-indigo-500/50 flex flex-col items-center justify-center text-slate-600 hover:text-indigo-400 cursor-pointer">
+                        <label className="w-24 h-12 rounded-none border border-dashed border-slate-800 hover:border-slate-650 flex flex-col items-center justify-center text-slate-600 hover:text-white cursor-pointer">
                           <LucideIcons.Upload className="w-4 h-4" />
                           <input type="file" accept="image/*" onChange={handleOgImageUpload} className="hidden" />
                         </label>
                       )}
-                      <span className="text-[10px] text-slate-500 leading-tight">Image de partage réseaux sociaux (800x418)</span>
+                      <span className="text-[10px] text-slate-500 leading-tight font-sans">Image de partage réseaux sociaux (800x418)</span>
                     </div>
                   </div>
                 </div>
@@ -511,30 +511,30 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
             {/* TAB: ANALYTICS */}
             {activeTab === "analytics" && (
               <div className="space-y-6">
-                <h3 className="text-md font-bold text-white border-b border-slate-800 pb-3">Intégration Umami Analytics</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <h3 className="text-md font-bold text-white border-b border-slate-800 pb-3 font-serif-title">Intégration Umami Analytics</h3>
+                <p className="text-xs text-slate-400 leading-relaxed font-sans">
                   Mesurez l'activité sur votre landing page sans violer la vie privée de vos visiteurs en connectant une instance Umami.
                 </p>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Adresse du script de suivi (Script URL)</label>
+                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Adresse du script de suivi (Script URL)</label>
                   <input
                     type="url"
                     value={umamiUrl}
                     onChange={(e) => setUmamiUrl(e.target.value)}
                     placeholder="https://analytics.umami.is/script.js"
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
+                    className="w-full px-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm font-sans"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">ID du site (Website ID)</label>
+                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">ID du site (Website ID)</label>
                   <input
                     type="text"
                     value={umamiId}
                     onChange={(e) => setUmamiId(e.target.value)}
                     placeholder="xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
+                    className="w-full px-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm font-sans"
                   />
                 </div>
               </div>
@@ -545,10 +545,10 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
               <button
                 type="submit"
                 disabled={loading}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors cursor-pointer shadow-md disabled:opacity-50"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-none bg-white hover:bg-slate-200 border border-white text-black text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer disabled:opacity-50"
               >
                 {loading && (
-                  <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                  <svg className="animate-spin h-4 w-4 text-black" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>

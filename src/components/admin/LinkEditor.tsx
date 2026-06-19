@@ -302,16 +302,16 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
   return (
     <div className="space-y-8 text-left">
       
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center border-b border-slate-800 pb-6 mb-2">
         <div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">Gestion des Liens</h1>
+          <h1 className="text-3xl font-bold text-white tracking-tight font-serif-title">Gestion des Liens</h1>
           <p className="text-sm text-slate-400 mt-1">Créez, modifiez et réorganisez vos liens publics.</p>
         </div>
         
         {!showAddForm && !editingLink && (
           <button
             onClick={() => { resetForm(); setShowAddForm(true); }}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-all cursor-pointer shadow-md shadow-indigo-600/10 border border-indigo-500/20"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-none bg-white text-black hover:bg-black hover:text-white border border-white hover:border-slate-800 text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer"
           >
             <LucideIcons.Plus className="w-4 h-4" />
             Nouveau lien
@@ -321,18 +321,18 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
 
       {/* ERROR MSG */}
       {error && (
-        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200 text-sm flex items-start space-x-3">
+        <div className="p-4 rounded-none bg-red-950/20 border border-red-900/50 text-red-300 text-sm flex items-start space-x-3">
           <LucideIcons.AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-          <span>{error}</span>
+          <span className="font-sans">{error}</span>
         </div>
       )}
 
       {/* FORM: ADD OR EDIT LINK */}
       {(showAddForm || editingLink) && (
-        <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800/80 shadow-xl glassmorphism">
-          <div className="flex justify-between items-center mb-6 border-b border-slate-800/60 pb-4">
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              {editingLink ? <LucideIcons.Edit3 className="w-5 h-5 text-indigo-400" /> : <LucideIcons.Plus className="w-5 h-5 text-indigo-400" />}
+        <div className="p-6 rounded-none bg-slate-950 border border-slate-800">
+          <div className="flex justify-between items-center mb-6 border-b border-slate-800 pb-4">
+            <h3 className="text-lg font-bold text-white flex items-center gap-2 font-serif-title">
+              {editingLink ? <LucideIcons.Edit3 className="w-5 h-5 text-slate-400" /> : <LucideIcons.Plus className="w-5 h-5 text-slate-400" />}
               {editingLink ? "Modifier le lien" : "Ajouter un nouveau lien"}
             </h3>
             <button
@@ -348,36 +348,36 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
             {/* Left Column (Inputs) */}
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Titre affiché (Obligatoire)</label>
+                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Titre affiché (Obligatoire)</label>
                 <input
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="ex: Mon GitHub"
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
+                  className="w-full px-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm font-sans"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">URL Cible (Obligatoire)</label>
+                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">URL Cible (Obligatoire)</label>
                 <input
                   type="url"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://github.com/..."
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
+                  className="w-full px-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm font-sans"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Description courte (Facultatif)</label>
+                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Description courte (Facultatif)</label>
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Une brève explication..."
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm h-20 resize-none"
+                  className="w-full px-4 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white placeholder-slate-700 focus:outline-none focus:border-slate-500 text-sm h-20 resize-none font-sans"
                 />
               </div>
             </div>
@@ -387,12 +387,12 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
               
               {/* Image Preview Selector */}
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">
                   Image de prévisualisation (Obligatoire)
                 </label>
                 <div className="flex items-center gap-4">
                   {previewImage ? (
-                    <div className="relative w-28 h-16 rounded-lg overflow-hidden border border-slate-800">
+                    <div className="relative w-28 h-16 rounded-none overflow-hidden border border-slate-800">
                       <img src={previewImage} alt="Preview" className="w-full h-full object-cover" />
                       <button
                         type="button"
@@ -403,13 +403,13 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
                       </button>
                     </div>
                   ) : (
-                    <label className="w-28 h-16 rounded-lg border border-dashed border-slate-800 hover:border-indigo-500/50 transition-colors flex flex-col items-center justify-center text-slate-600 hover:text-indigo-400 cursor-pointer">
+                    <label className="w-28 h-16 rounded-none border border-dashed border-slate-800 hover:border-slate-600 transition-colors flex flex-col items-center justify-center text-slate-600 hover:text-white cursor-pointer">
                       <LucideIcons.Upload className="w-5 h-5 mb-1" />
-                      <span className="text-[10px]">Téléverser</span>
+                      <span className="text-[10px] font-sans">Téléverser</span>
                       <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
                     </label>
                   )}
-                  <div className="text-xs text-slate-500">
+                  <div className="text-xs text-slate-500 font-sans leading-relaxed">
                     <p>Formats recommandés : WebP, PNG, JPG.</p>
                     <p className="mt-1">L'image sera redimensionnée pour la prévisualisation au survol.</p>
                   </div>
@@ -419,14 +419,14 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
               {/* Icon / Color picker */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Icône</label>
+                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Icône</label>
                   <select
                     value={icon}
                     onChange={(e) => setIcon(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl bg-slate-950/50 border border-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
+                    className="w-full px-3 py-2.5 rounded-none bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-slate-500 text-sm font-sans"
                   >
                     {availableIcons.map((ic) => (
-                      <option key={ic} value={ic} className="bg-slate-950">
+                      <option key={ic} value={ic} className="bg-slate-950 font-sans">
                         {ic}
                       </option>
                     ))}
@@ -434,20 +434,20 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
                 </div>
                 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Accentuation</label>
+                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-sans">Accentuation</label>
                   <div className="flex gap-2">
                     <input
                       type="color"
                       value={accentColor}
                       onChange={(e) => setAccentColor(e.target.value)}
-                      className="w-10 h-10 rounded-lg bg-slate-950/50 border border-slate-800 cursor-pointer overflow-hidden p-0"
+                      className="w-10 h-10 rounded-none bg-slate-950 border border-slate-800 cursor-pointer overflow-hidden p-0"
                     />
                     <input
                       type="text"
                       value={accentColor}
                       onChange={(e) => setAccentColor(e.target.value)}
                       placeholder="#4f46e5"
-                      className="w-full px-3 py-2 rounded-xl bg-slate-950/50 border border-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm"
+                      className="w-full px-3 py-2 rounded-none bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-slate-500 text-sm font-sans"
                     />
                   </div>
                 </div>
@@ -460,9 +460,9 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
                   id="enabledCheck"
                   checked={enabled}
                   onChange={(e) => setEnabled(e.target.checked)}
-                  className="rounded bg-slate-950 border-slate-800 text-indigo-600 focus:ring-indigo-500/50 w-4 h-4"
+                  className="rounded-none bg-slate-950 border-slate-800 text-white focus:ring-0 focus:ring-offset-0 w-4 h-4"
                 />
-                <label htmlFor="enabledCheck" className="text-sm font-medium text-slate-300">
+                <label htmlFor="enabledCheck" className="text-sm font-medium text-slate-300 font-sans">
                   Activer immédiatement ce lien
                 </label>
               </div>
@@ -474,14 +474,14 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
               <button
                 type="button"
                 onClick={() => { setEditingLink(null); setShowAddForm(false); resetForm(); }}
-                className="px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 text-sm transition-colors cursor-pointer border border-transparent"
+                className="px-4 py-2 bg-slate-900 border border-slate-800 hover:bg-slate-850 hover:border-slate-700 text-slate-300 text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer rounded-none"
               >
                 Annuler
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors cursor-pointer disabled:opacity-50"
+                className="px-5 py-2 bg-white hover:bg-slate-200 border border-white text-black text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer disabled:opacity-50 rounded-none"
               >
                 {loading ? "Sauvegarde..." : editingLink ? "Mettre à jour" : "Créer le lien"}
               </button>
@@ -507,8 +507,8 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
                 onDragOver={(e) => handleDragOver(e, index)}
                 onDragEnd={handleDragEnd}
                 onDrop={() => handleDrop(index)}
-                className={`p-4 rounded-2xl bg-slate-900/40 border transition-all duration-200 flex items-center justify-between ${
-                  isDragOver ? "border-indigo-500 border-dashed translate-y-1" : "border-slate-800/80"
+                className={`p-4 rounded-none bg-slate-950 border transition-all duration-200 flex items-center justify-between ${
+                  isDragOver ? "border-white border-dashed translate-y-1" : "border-slate-800"
                 } ${isDragged ? "opacity-30 border-dashed" : ""}`}
                 style={itemStyle}
               >
@@ -519,11 +519,11 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
                   </div>
                   
                   {link.preview_image ? (
-                    <div className="w-14 h-9 rounded-lg overflow-hidden border border-slate-800 flex-shrink-0">
+                    <div className="w-14 h-9 rounded-none overflow-hidden border border-slate-800 flex-shrink-0">
                       <img src={link.preview_image} alt="" className="w-full h-full object-cover" />
                     </div>
                   ) : (
-                    <div className="w-14 h-9 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-center text-slate-700 flex-shrink-0">
+                    <div className="w-14 h-9 rounded-none bg-slate-900 border border-slate-850 flex items-center justify-center text-slate-700 flex-shrink-0">
                       <LucideIcons.Image className="w-4 h-4" />
                     </div>
                   )}
@@ -535,7 +535,7 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
                       </span>
                       {link.accent_color && (
                         <span
-                          className="w-2.5 h-2.5 rounded-full"
+                          className="w-2.5 h-2.5 rounded-none"
                           style={{ backgroundColor: link.accent_color }}
                           title={`Couleur accent: ${link.accent_color}`}
                         ></span>
@@ -552,10 +552,10 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
                   {/* Status label / click toggler */}
                   <button
                     onClick={() => handleToggleLink(link)}
-                    className={`px-3 py-1 rounded-full text-xs font-semibold border cursor-pointer transition-colors ${
+                    className={`px-3 py-1 rounded-none text-xs font-semibold border cursor-pointer transition-colors ${
                       link.enabled === 1
-                        ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20"
-                        : "bg-slate-800/40 text-slate-500 border-slate-800 hover:bg-slate-800"
+                        ? "bg-slate-900 text-white border-slate-750 hover:bg-slate-800"
+                        : "bg-slate-950/40 text-slate-500 border-slate-900 hover:bg-slate-900"
                     }`}
                   >
                     {link.enabled === 1 ? "Actif" : "Désactivé"}
@@ -564,7 +564,7 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
                   {/* Edit button */}
                   <button
                     onClick={() => startEdit(link)}
-                    className="p-2 rounded-xl bg-slate-950/40 hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer border border-slate-800/40"
+                    className="p-2 rounded-none bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer border border-slate-800"
                     title="Modifier"
                   >
                     <LucideIcons.Edit3 className="w-4 h-4" />
@@ -573,7 +573,7 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
                   {/* Delete button */}
                   <button
                     onClick={() => handleDeleteLink(link.id)}
-                    className="p-2 rounded-xl bg-slate-950/40 hover:bg-red-500/10 text-slate-400 hover:text-red-400 transition-colors cursor-pointer border border-slate-800/40"
+                    className="p-2 rounded-none bg-slate-900 hover:bg-red-950/30 text-slate-400 hover:text-red-400 transition-colors cursor-pointer border border-slate-800 hover:border-red-900/50"
                     title="Supprimer"
                   >
                     <LucideIcons.Trash2 className="w-4 h-4" />
@@ -584,9 +584,9 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({ initialLinks }) => {
             );
           })
         ) : (
-          <div className="py-16 text-center rounded-2xl border border-dashed border-slate-800 text-slate-500">
+          <div className="py-16 text-center rounded-none border border-dashed border-slate-800 text-slate-500">
             <LucideIcons.Link2 className="w-10 h-10 mx-auto text-slate-700 mb-3" />
-            <p className="font-medium text-slate-400">Aucun lien n'a été créé</p>
+            <p className="font-semibold text-slate-400 font-serif-title">Aucun lien n'a été créé</p>
             <p className="text-xs text-slate-600 mt-1">Cliquez sur "Nouveau lien" en haut pour commencer.</p>
           </div>
         )}
