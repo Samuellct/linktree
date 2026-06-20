@@ -1,4 +1,4 @@
-# Présentation du Projet — Agrégateur de Liens (Linktree)
+# Présentation du Projet - Agrégateur de Liens (Linktree)
 
 Ce document présente l'état d'avancement, les choix techniques et la direction artistique actuelle du projet pour servir de base de réflexion et d'idéation design.
 
@@ -6,7 +6,7 @@ Ce document présente l'état d'avancement, les choix techniques et la direction
 
 ---
 
-## 🎯 1. Objectif du Projet
+## 1. Objectif du Projet
 
 L'objectif est de créer un **agrégateur de liens personnel** (similaire à Linktree ou Linkinbio) auto-hébergé, ultra-rapide, respectueux de la vie privée, et doté d'une identité visuelle forte. 
 
@@ -17,7 +17,7 @@ Contrairement aux solutions commerciales saturées de publicités et de designs 
 
 ---
 
-## 🎨 2. Direction Artistique Actuelle : "Galerie Éditoriale"
+## 2. Direction Artistique Actuelle : "Galerie Éditoriale"
 
 L'interface actuelle a été refondue selon le style **Galerie Éditoriale** (inspiré de la presse littéraire, des portfolios d'art contemporain et du minimalisme architectural).
 
@@ -33,7 +33,7 @@ L'interface actuelle a été refondue selon le style **Galerie Éditoriale** (in
 
 ---
 
-## 🛠️ 3. Fonctionnalités Clés
+## 3. Fonctionnalités Clés
 
 Le projet se compose de deux espaces distincts :
 
@@ -60,7 +60,7 @@ Le projet se compose de deux espaces distincts :
 
 ---
 
-## 💻 4. Architecture Technique & Performance
+## 4. Architecture Technique & Performance
 
 Pour un designer, les performances techniques dictent les limites créatives. Voici les détails de l'infrastructure :
 
@@ -74,7 +74,7 @@ Pour un designer, les performances techniques dictent les limites créatives. Vo
 
 ---
 
-## 🎨 5. Pistes de Réflexion Design (Pour le Designer)
+## 5. Pistes de Réflexion Design (Pour le Designer)
 
 Pour aider à affiner ou repenser l'expérience utilisateur, voici quelques axes de travail possibles :
 
