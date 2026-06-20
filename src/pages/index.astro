@@ -57,7 +57,7 @@ const activeSocials = socials
   });
 ---
 
-<Layout settings={settings}>
+<Layout settings={settings} title="SL | Accueil">
   <div class="min-h-screen flex flex-col justify-between py-16 px-4 relative overflow-hidden">
     
     <!-- Main Content Card -->
@@ -103,6 +103,9 @@ const activeSocials = socials
                 rel="noopener noreferrer" 
                 class="hover:opacity-60 transition-opacity"
                 aria-label={social.label}
+                data-umami-event="click-social"
+                data-umami-event-platform={social.label}
+                data-umami-event-url={social.url}
               >
                 {social.label}
               </a>

@@ -74,6 +74,9 @@ export const PreviewCard: React.FC<PreviewCardProps> = ({
         href={clickUrl}
         className="flex items-center justify-between w-full p-4 mb-4 border border-[var(--color-border)] bg-[var(--color-card-bg)] text-[var(--color-text)] hover:bg-[var(--color-hover-bg)] hover:text-[var(--color-hover-text)] transition-all duration-200 rounded-none group"
         style={cardStyle}
+        data-umami-event="click-link"
+        data-umami-event-title={title}
+        data-umami-event-url={url}
       >
         <div className="flex items-center space-x-4">
           <div className="p-2 border border-current text-current/80 group-hover:scale-105 transition-transform duration-200">

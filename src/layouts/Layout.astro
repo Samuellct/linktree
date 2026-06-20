@@ -11,11 +11,17 @@ interface Props {
 const { title, description, settings = {} } = Astro.props;
 
 // Read settings values with sensible defaults
-const siteName = settings.site_name || "My Linktree";
+const siteName = settings.site_name || "SL | Accueil";
 const metaTitle = title || settings.seo_title || siteName;
 const metaDescription = description || settings.seo_description || `Check out ${siteName}'s links and social profiles.`;
 const ogImage = settings.og_image || "";
-const favicon = settings.favicon || "/favicon.ico";
+const favicon = settings.favicon || "/favicon.png";
+
+const faviconType = favicon.endsWith('.svg') 
+  ? 'image/svg+xml' 
+  : favicon.endsWith('.png') 
+    ? 'image/png' 
+    : 'image/x-icon';
 
 // Detect light or dark theme variant based on settings.theme_style (or fallback to color check)
 let themeStyle = settings.theme_style || "light";
