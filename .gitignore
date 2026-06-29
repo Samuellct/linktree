@@ -26,3 +26,6 @@ pnpm-debug.log*
 # wrangler local state
 .wrangler/
 
+# ignored showrooms
+public/showroom_hovers.html
+

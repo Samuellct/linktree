@@ -63,6 +63,26 @@ export const PreviewCard: React.FC<PreviewCardProps> = ({
     exit: { opacity: 0, scale: 0.98, y: 4, transition: { duration: 0.12 } },
   };
 
+  const hoverBtnClass = animationsEnabled
+    ? "hover:bg-[var(--color-hover-bg)] hover:text-[var(--color-hover-text)]"
+    : "";
+
+  const hoverIconClass = animationsEnabled
+    ? "group-hover:scale-105"
+    : "";
+
+  const hoverTextClass = animationsEnabled
+    ? "group-hover:text-[var(--color-hover-text)]"
+    : "";
+
+  const hoverMutedClass = animationsEnabled
+    ? "group-hover:text-[var(--color-hover-muted)]"
+    : "";
+
+  const hoverArrowClass = animationsEnabled
+    ? "group-hover:text-[var(--color-hover-text)] group-hover:translate-x-1.5"
+    : "";
+
   return (
     <div
       className="relative w-full"
@@ -72,39 +92,39 @@ export const PreviewCard: React.FC<PreviewCardProps> = ({
       {/* Main Link Button */}
       <a
         href={clickUrl}
-        className="flex items-center justify-between w-full p-4 mb-4 border border-[var(--color-border)] bg-[var(--color-card-bg)] text-[var(--color-text)] hover:bg-[var(--color-hover-bg)] hover:text-[var(--color-hover-text)] transition-all duration-200 rounded-none group"
+        className={`flex items-center justify-between w-full p-4 mb-4 border border-[var(--color-border)] bg-[var(--color-card-bg)] text-[var(--color-text)] transition-all duration-200 rounded-none group ${hoverBtnClass}`}
         style={cardStyle}
         data-umami-event="click-link"
         data-umami-event-title={title}
         data-umami-event-url={url}
       >
         <div className="flex items-center space-x-4">
-          <div className="p-2 border border-current text-current/80 group-hover:scale-105 transition-transform duration-200">
+          <div className={`p-2 border border-current text-current/80 transition-transform duration-200 ${hoverIconClass}`}>
             <IconRenderer name={iconName || "Link"} className="w-5 h-5" />
           </div>
           <div className="text-left">
-            <h3 className="font-bold text-sm tracking-tight group-hover:text-[var(--color-hover-text)] transition-colors" style={textAccent}>
+            <h3 className={`font-bold text-sm tracking-tight transition-colors ${hoverTextClass}`} style={textAccent}>
               {title}
             </h3>
             {description && (
-              <p className="text-[11px] text-[var(--color-text-muted)] group-hover:text-[var(--color-hover-muted)] transition-colors line-clamp-1 mt-0.5 font-light">
+              <p className={`text-[11px] text-[var(--color-text-muted)] transition-colors line-clamp-1 mt-0.5 font-light ${hoverMutedClass}`}>
                 {description}
               </p>
             )}
           </div>
         </div>
 
-        <div className="p-1 text-[var(--color-text-muted)] group-hover:text-[var(--color-hover-text)] group-hover:translate-x-0.5 transition-all">
+        <div className={`p-1 text-[var(--color-text-muted)] transition-all ${hoverArrowClass}`}>
           <span className="text-sm font-mono font-bold">→</span>
         </div>
       </a>
 
       {/* Floating Animated Website Preview */}
-      {previewImage && (
+      {previewImage && animationsEnabled && (
         <AnimatePresence>
           {isHovered && (
             <motion.div
-              variants={animationsEnabled ? tooltipVariants : {}}
+              variants={tooltipVariants}
               initial="hidden"
               animate="visible"
               exit="exit"

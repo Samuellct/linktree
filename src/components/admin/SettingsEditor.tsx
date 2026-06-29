@@ -339,7 +339,7 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ initialSettings 
                     className="rounded-none bg-slate-950 border-slate-800 text-white focus:ring-0 focus:ring-offset-0 w-4 h-4"
                   />
                   <label htmlFor="animationCheck" className="text-sm font-medium text-slate-300 font-sans">
-                    Activer les transitions animées douces au survol
+                    Activer l'animation au survol (Inversion Brutaliste et Aperçu d'image)
                   </label>
                 </div>
               </div>
