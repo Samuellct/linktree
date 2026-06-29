@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Showroom d'Animations Hover - Galerie & Modernité</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for projects typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Fira+Mono:wght@400;500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ---------------------------------------------------- */
+    /* Typographies                                         */
+    /* ---------------------------------------------------- */
+    .font-serif-title { font-family: 'Playfair Display', Georgia, serif; }
+    .font-serif-body { font-family: 'Lora', Garamond, serif; }
+    .font-sans-modern { font-family: 'DM Sans', sans-serif; }
+    .font-mono-tech { font-family: 'Fira Mono', monospace; }
+
+    /* ---------------------------------------------------- */
+    /* Animations & Hover styles                            */
+    /* ---------------------------------------------------- */
+
+    /* 1. L'Inversion Brutaliste (Style Galerie d'art) */
+    .card-brutalist {
+      transition: background-color 0.18s cubic-bezier(0.25, 1, 0.5, 1), 
+                  color 0.18s cubic-bezier(0.25, 1, 0.5, 1), 
+                  border-color 0.18s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .card-brutalist:hover {
+      background-color: #111111 !important;
+      color: #ffffff !important;
+      border-color: #111111 !important;
+    }
+    .theme-dark .card-brutalist:hover {
+      background-color: #ffffff !important;
+      color: #111111 !important;
+      border-color: #ffffff !important;
+    }
+    .card-brutalist .arrow {
+      transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .card-brutalist:hover .arrow {
+      transform: translateX(6px);
+    }
+
+    /* 2. Zoom Photo Galerie (Inspiration: gallery-hover-effect) */
+    .card-gallery-zoom {
+      position: relative;
+      overflow: hidden;
+      transition: padding-left 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                  border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .card-gallery-zoom .bg-preview {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1.18);
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                  opacity 0.35s ease;
+      z-index: 0;
+      filter: grayscale(100%) contrast(1.1) brightness(0.9);
+    }
+    .theme-dark .card-gallery-zoom .bg-preview {
+      filter: grayscale(100%) contrast(1.1) brightness(0.4);
+    }
+    .card-gallery-zoom:hover .bg-preview {
+      opacity: 0.12;
+      transform: scale(1);
+    }
+    .theme-dark .card-gallery-zoom:hover .bg-preview {
+      opacity: 0.25;
+    }
+    .card-gallery-zoom:hover {
+      padding-left: 1.5rem !important;
+    }
+    .card-gallery-zoom .content-inner {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* 3. Rideau Latéral (Minimalist Slide-Over Curtain) */
+    .card-curtain {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+    .card-curtain::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #111111;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: -1;
+    }
+    .theme-dark .card-curtain::before {
+      background: #ffffff;
+    }
+    .card-curtain:hover::before {
+      transform: scaleX(1);
+    }
+    .card-curtain:hover {
+      color: #ffffff !important;
+      border-color: #111111 !important;
+    }
+    .theme-dark .card-curtain:hover {
+      color: #111111 !important;
+      border-color: #ffffff !important;
+    }
+    .card-curtain .arrow {
+      transition: transform 0.3s ease;
+    }
+    .card-curtain:hover .arrow {
+      transform: rotate(-45deg);
+    }
+
+    /* 4. Glissement Split Vertical (Inspiration: profile-card-hover) */
+    .card-split-vertical {
+      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                  box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .card-split-vertical .drawer {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                  opacity 0.25s ease, 
+                  margin-top 0.35s ease;
+    }
+    .card-split-vertical:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+    }
+    .theme-dark .card-split-vertical:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    .card-split-vertical:hover .drawer {
+      max-height: 80px;
+      opacity: 1;
+      margin-top: 0.75rem;
+    }
+
+    /* 5. Capsule Gradient Glow (Inspiration: css-icon-hover-effects) */
+    .card-gradient-glow {
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-gradient-glow .icon-box {
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .card-gradient-glow:hover {
+      border-color: #8b5cf6 !important;
+      box-shadow: 0 10px 25px rgba(139, 92, 246, 0.12);
+    }
+    .theme-dark .card-gradient-glow:hover {
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+    }
+    .card-gradient-glow:hover .icon-box {
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      color: #ffffff !important;
+      border-color: transparent !important;
+      transform: scale(1.05);
+    }
+    .card-gradient-glow .arrow {
+      transition: transform 0.3s ease;
+    }
+    .card-gradient-glow:hover .arrow {
+      color: #ec4899;
+      transform: scale(1.2);
+    }
+
+    /* 6. Tracé Technique Blueprint (Effet Ligne de Dessin) */
+    .card-blueprint {
+      border-style: dashed !important;
+      transition: all 0.2s steps(4);
+    }
+    .card-blueprint:hover {
+      border-style: solid !important;
+      border-color: currentColor !important;
+      background-color: rgba(0, 0, 0, 0.02) !important;
+      padding-left: 1.5rem !important;
+    }
+    .theme-dark .card-blueprint:hover {
+      background-color: rgba(255, 255, 255, 0.02) !important;
+    }
+    .card-blueprint::after {
+      content: " [active]";
+      font-family: monospace;
+      font-size: 9px;
+      opacity: 0;
+      transition: opacity 0.2s steps(2);
+    }
+    .card-blueprint:hover::after {
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body class="bg-zinc-900 text-zinc-100 min-h-screen flex flex-col font-sans-modern">
+
+  <!-- Header -->
+  <header class="border-b border-zinc-800 bg-zinc-950/90 sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-4">
+      <div>
+        <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+          <span>✦</span> Showroom Interactif : 6 Mockups d'Animations Hover
+        </h1>
+        <p class="text-xs text-zinc-400 mt-0.5">Explorez et testez les différentes animations de cartes pour votre agrégateur de liens.</p>
+      </div>
+      
+      <!-- Quick Options -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleDarkMode()" class="px-3 py-1.5 text-xs font-semibold rounded border border-zinc-800 bg-zinc-900 text-zinc-300 hover:text-white transition-all">
+          🌓 Mode Sombre / Clair (Simulateur)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Splitter -->
+  <main class="flex-grow max-w-6xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Left Column: Specs & Selector -->
+    <div class="lg:col-span-6 space-y-6">
+      
+      <!-- Animation Selector Buttons -->
+      <div class="bg-zinc-950 p-6 rounded-xl border border-zinc-800">
+        <h3 class="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-4">Choisissez un mockup d'animation</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <button onclick="selectAnimation('brutalist')" id="btn-brutalist" class="px-4 py-3 text-left text-xs font-bold rounded border transition-all bg-zinc-800 border-zinc-700 text-white">
+            1. L'Inversion Brutaliste
+          </button>
+          <button onclick="selectAnimation('gallery-zoom')" id="btn-gallery-zoom" class="px-4 py-3 text-left text-xs font-bold rounded border transition-all text-zinc-400 border-zinc-850 hover:text-white bg-zinc-900/50">
+            2. Zoom Photo Galerie
+          </button>
+          <button onclick="selectAnimation('curtain')" id="btn-curtain" class="px-4 py-3 text-left text-xs font-bold rounded border transition-all text-zinc-400 border-zinc-850 hover:text-white bg-zinc-900/50">
+            3. Le Rideau Latéral
+          </button>
+          <button onclick="selectAnimation('split-vertical')" id="btn-split-vertical" class="px-4 py-3 text-left text-xs font-bold rounded border transition-all text-zinc-400 border-zinc-850 hover:text-white bg-zinc-900/50">
+            4. Le Split Vertical
+          </button>
+          <button onclick="selectAnimation('gradient-glow')" id="btn-gradient-glow" class="px-4 py-3 text-left text-xs font-bold rounded border transition-all text-zinc-400 border-zinc-850 hover:text-white bg-zinc-900/50">
+            5. Capsule Gradient Glow
+          </button>
+          <button onclick="selectAnimation('blueprint')" id="btn-blueprint" class="px-4 py-3 text-left text-xs font-bold rounded border transition-all text-zinc-400 border-zinc-850 hover:text-white bg-zinc-900/50">
+            6. Le Tracé Blueprint
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Specification Card -->
+      <div class="bg-zinc-950 p-6 rounded-xl border border-zinc-800 space-y-4">
+        <div>
+          <h2 id="anim-title" class="text-lg font-bold text-white mb-1">1. L'Inversion Brutaliste</h2>
+          <p id="anim-tagline" class="text-xs text-violet-400 font-semibold uppercase tracking-wider">Style Galerie d'Art & Haute Couture</p>
+        </div>
+        
+        <p id="anim-desc" class="text-sm text-zinc-300 leading-relaxed">
+          Inspiré du minimalisme haut de gamme. Aucun dégradé ni ombre portée complexe. L'effet de hover se produit via un contraste net et immédiat de type "négatif/positif". La carte blanche devient noire, le texte devient blanc, et l'indicateur de direction glisse subtilement vers la droite.
+        </p>
+
+        <!-- Technical spec sheets -->
+        <div class="border-t border-zinc-800 pt-4 space-y-3">
+          <div>
+            <h4 class="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">Comportement & Intégration</h4>
+            <ul id="anim-bullets" class="text-xs text-zinc-400 list-disc list-inside space-y-1.5">
+              <li>Inversion instantanée ou ultra-rapide (180ms)</li>
+              <li>Aucun arrondi de boîte (angles bruts orthogonaux)</li>
+              <li>Translation horizontale de la flèche de navigation</li>
+              <li>Adapté pour conserver le look "Galerie Éditoriale" du site</li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">Propriétés CSS Clés</h4>
+            <pre id="anim-css" class="text-xs font-mono bg-zinc-900 p-3 rounded border border-zinc-800 text-zinc-300 overflow-x-auto">
+.card {
+  transition: all 0.18s ease-in-out;
+}
+.card:hover {
+  background-color: #111;
+  color: #fff;
+  border-color: #111;
+}</pre>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column: Smartphone Simulator -->
+    <div class="lg:col-span-6 flex justify-center bg-zinc-950 rounded-2xl border border-zinc-800 p-6 relative overflow-hidden">
+      
+      <!-- Simulated Phone Screen Frame -->
+      <div class="w-full max-w-sm border-[6px] border-zinc-800 rounded-[32px] overflow-hidden bg-zinc-900 shadow-2xl relative">
+        <!-- Phone Camera Notch -->
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-4 bg-zinc-800 rounded-b-xl z-50"></div>
+        
+        <!-- Screen container -->
+        <div id="phone-screen" class="bg-white text-zinc-900 min-h-[600px] py-12 px-6 flex flex-col justify-between transition-all duration-300">
+          
+          <!-- Top section -->
+          <div>
+            <!-- Header profile -->
+            <div class="text-center mb-8 pt-4">
+              <div id="avatar-container" class="w-16 h-16 mx-auto mb-3 border border-current p-1 transition-all rounded-none">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150" alt="Samuel Lecomte" class="w-full h-full object-cover grayscale">
+              </div>
+              <h2 class="font-serif-title text-xl font-bold tracking-tight">Samuel Lecomte</h2>
+              <p class="text-xs font-serif-body opacity-75 mt-1 max-w-[240px] mx-auto">Recherche logicielle & minimalisme esthétique.</p>
+            </div>
+
+            <!-- Interactive Cards Container -->
+            <div class="space-y-3">
+              
+              <!-- Link 1 -->
+              <div class="card-element card-brutalist flex flex-col w-full p-4 border border-zinc-300 bg-zinc-50/50 cursor-pointer">
+                <div class="content-inner flex items-center justify-between w-full">
+                  <div class="flex items-center gap-3 text-left">
+                    <div class="icon-box p-2 border border-current text-current/80 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-xs tracking-tight">Publications de Recherche</h4>
+                      <p class="text-[10px] opacity-75 mt-0.5 font-serif-body">Mes articles littéraires et techniques.</p>
+                    </div>
+                  </div>
+                  <span class="arrow text-sm font-mono font-bold">→</span>
+                </div>
+                
+                <!-- Drawer (Used in Split Vertical mockup) -->
+                <div class="drawer text-left text-[10px] font-serif-body opacity-70 border-t border-zinc-200/50 mt-0 pt-2">
+                  <p>Mis à jour il y a 2 jours • 4 articles disponibles en lecture libre.</p>
+                </div>
+                
+                <!-- Background Preview (Used in Gallery Zoom mockup) -->
+                <div class="bg-preview" style="background-image: url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=300');"></div>
+              </div>
+
+              <!-- Link 2 -->
+              <div class="card-element card-brutalist flex flex-col w-full p-4 border border-zinc-300 bg-zinc-50/50 cursor-pointer">
+                <div class="content-inner flex items-center justify-between w-full">
+                  <div class="flex items-center gap-3 text-left">
+                    <div class="icon-box p-2 border border-current text-current/80 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-xs tracking-tight">Projets GitHub Open Source</h4>
+                      <p class="text-[10px] opacity-75 mt-0.5 font-serif-body">Scripts, outils CLI et maquettes Astro.</p>
+                    </div>
+                  </div>
+                  <span class="arrow text-sm font-mono font-bold">→</span>
+                </div>
+                
+                <!-- Drawer (Used in Split Vertical mockup) -->
+                <div class="drawer text-left text-[10px] font-serif-body opacity-70 border-t border-zinc-200/50 mt-0 pt-2">
+                  <p>12 Dépôts publics • Langages clés : Rust, TypeScript, Astro.</p>
+                </div>
+                
+                <!-- Background Preview (Used in Gallery Zoom mockup) -->
+                <div class="bg-preview" style="background-image: url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&q=80&w=300');"></div>
+              </div>
+
+              <!-- Link 3 -->
+              <div class="card-element card-brutalist flex flex-col w-full p-4 border border-zinc-300 bg-zinc-50/50 cursor-pointer">
+                <div class="content-inner flex items-center justify-between w-full">
+                  <div class="flex items-center gap-3 text-left">
+                    <div class="icon-box p-2 border border-current text-current/80 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-xs tracking-tight">Me Contacter Directement</h4>
+                      <p class="text-[10px] opacity-75 mt-0.5 font-serif-body">Formulaire chiffré et clé PGP.</p>
+                    </div>
+                  </div>
+                  <span class="arrow text-sm font-mono font-bold">→</span>
+                </div>
+                
+                <!-- Drawer (Used in Split Vertical mockup) -->
+                <div class="drawer text-left text-[10px] font-serif-body opacity-70 border-t border-zinc-200/50 mt-0 pt-2">
+                  <p>PGP ID: 0x9F4B3C52 • Temps de réponse moyen : 24h.</p>
+                </div>
+                
+                <!-- Background Preview (Used in Gallery Zoom mockup) -->
+                <div class="bg-preview" style="background-image: url('https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&q=80&w=300');"></div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Bottom Area -->
+          <footer class="text-center pt-6 border-t border-zinc-200 text-[8px] tracking-widest uppercase opacity-60 flex justify-between items-center">
+            <span>© 2026 Samuel Lecomte</span>
+            <span>❖</span>
+          </footer>
+
+        </div>
+      </div>
+    </div>
+    
+  </main>
+
+  <footer class="border-t border-zinc-800 bg-zinc-950 py-6 text-center text-xs text-zinc-500 mt-auto">
+    Conçu pour aider à la décision esthétique. Fichier disponible dans le répertoire public.
+  </footer>
+
+  <script>
+    let isDarkMode = false;
+    let currentAnim = 'brutalist';
+
+    const animationSpecs = {
+      'brutalist': {
+        title: "1. L'Inversion Brutaliste",
+        tagline: "Style Galerie d'Art & Haute Couture",
+        desc: "Inspiré de l'esthétique minimaliste moderne. Le hover inverse instantanément les valeurs de couleur (fond noir et texte blanc). La flèche de navigation glisse légèrement sur la droite pour guider le clic. Simple, net, efficace.",
+        bullets: [
+          "Inversion de couleur sur le survol (transition douce de 180ms)",
+          "Aucun arrondi (coins bruts à angle droit)",
+          "Micro-glissement de la flèche de navigation",
+          "Conserve l'esthétique littéraire originale du site"
+        ],
+        css: `.card {
+  transition: background-color 0.18s ease, 
+              color 0.18s ease, 
+              border-color 0.18s ease;
+}
+.card:hover {
+  background-color: #111111;
+  color: #ffffff;
+  border-color: #111111;
+}
+.card .arrow {
+  transition: transform 0.25s ease;
+}
+.card:hover .arrow {
+  transform: translateX(6px);
+}`
+      },
+      'gallery-zoom': {
+        title: "2. Zoom Photo Galerie",
+        tagline: "Inspiré de l'affiche d'art & photo",
+        desc: "Une version épurée de l'effet 'gallery-hover-effect'. Au survol d'un lien, une image d'arrière-plan en noir et blanc très atténuée glisse et effectue un zoom arrière subtil (de scale 1.18 à scale 1). La carte se décale légèrement à gauche pour un effet d'asymétrie.",
+        bullets: [
+          "Apparition en fondu de l'image de prévisualisation à l'arrière-plan (opacité ~12%)",
+          "Dézoomage de l'image (de scale(1.18) à scale(1.0))",
+          "Décalage horizontal vers la gauche de la carte",
+          "Filtre noir et blanc appliqué sur l'image pour préserver la lisibilité"
+        ],
+        css: `.card {
+  position: relative;
+  overflow: hidden;
+  transition: padding-left 0.3s ease;
+}
+.card .bg-image {
+  position: absolute;
+  inset: 0;
+  transform: scale(1.18);
+  opacity: 0;
+  filter: grayscale(100%);
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+.card:hover .bg-image {
+  opacity: 0.12;
+  transform: scale(1);
+}
+.card:hover {
+  padding-left: 24px;
+}`
+      },
+      'curtain': {
+        title: "3. Le Rideau Latéral",
+        tagline: "Effet d'inversion par translation",
+        desc: "Un effet premium dans lequel un fond de couleur unie (noir en mode clair, blanc en mode sombre) glisse de la gauche vers la droite comme un rideau au survol, recouvrant la carte. Le texte bascule de couleur pour rester lisible et la flèche subit une légère rotation.",
+        bullets: [
+          "Génération d'un pseudo-élément ::before aligné à gauche",
+          "Animation de transformation d'échelle scaleX de 0 à 1",
+          "Changement immédiat de couleur de texte sur le survol",
+          "Flèche de navigation pivotant à -45 degrés (indiquant un lien externe)"
+        ],
+        css: `.card {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #111;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+.card:hover::before {
+  transform: scaleX(1);
+}
+.card:hover {
+  color: #fff;
+}`
+      },
+      'split-vertical': {
+        title: "4. Le Split Vertical",
+        tagline: "Inspiré des fenêtres coulissantes",
+        desc: "Adaptation de l'effet 'profile-card-hover'. Au survol de la carte, celle-ci s'ouvre verticalement vers le bas pour révéler un panneau d'information complémentaire (métadonnées, résumé, ou date). La carte prend de la hauteur de manière fluide.",
+        bullets: [
+          "Élargissement de la hauteur de la carte au survol",
+          "Panneau d'information masqué (max-height: 0, opacity: 0)",
+          "Dévoilement fluide en hauteur (max-height: 80px, opacity: 1)",
+          "Donne un côté très interactif et 'application web' haut de gamme"
+        ],
+        css: `.card {
+  transition: transform 0.3s ease;
+}
+.card .drawer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+}
+.card:hover .drawer {
+  max-height: 80px;
+  opacity: 1;
+}`
+      },
+      'gradient-glow': {
+        title: "5. Capsule Gradient Glow",
+        tagline: "Lueur de surbrillance colorée",
+        desc: "Combinaison de l'effet 'css-icon-hover-effects'. Au lieu d'avoir un fond uni triste, le survol active une fine bordure colorée (violet/rose) et applique une ombre projetée diffuse lumineuse. L'icône de gauche prend un fond dégradé dynamique violet vers rose.",
+        bullets: [
+          "Bordure de focus colorée violette/rose",
+          "Lumière diffuse projetée en arrière-plan de la carte (shadow coloré)",
+          "L'icône passe de gris/monochrome à un fond dégradé coloré",
+          "Une option idéale si l'utilisateur souhaite réintroduire de la couleur"
+        ],
+        css: `.card:hover {
+  border-color: #8b5cf6;
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.12);
+}
+.card:hover .icon-box {
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  color: #fff;
+  border-color: transparent;
+}`
+      },
+      'blueprint': {
+        title: "6. Le Tracé Blueprint",
+        tagline: "Esthétique industrielle et technique",
+        desc: "Pour les adeptes du design minimaliste fonctionnel. La carte possède initialement une bordure en pointillés. Au survol, la bordure devient solide, le fond prend un léger gris et un indicateur technique '[active]' textuel apparaît à la fin du titre de façon brute.",
+        bullets: [
+          "Bordure en pointillés (dashed) par défaut",
+          "Passage à une bordure continue (solid) de couleur contrastée",
+          "Léger décalage horizontal et augmentation de l'opacité",
+          "Apparition d'un tag monospace '[active]' indiquant la focalisation"
+        ],
+        css: `.card {
+  border-style: dashed;
+  transition: all 0.2s steps(4);
+}
+.card:hover {
+  border-style: solid;
+  border-color: currentColor;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+.card::after {
+  content: " [active]";
+  font-family: monospace;
+  opacity: 0;
+}
+.card:hover::after {
+  opacity: 0.5;
+}`
+      }
+    };
+
+    function selectAnimation(animKey) {
+      currentAnim = animKey;
+      
+      // Update selector buttons classes
+      const animKeys = ['brutalist', 'gallery-zoom', 'curtain', 'split-vertical', 'gradient-glow', 'blueprint'];
+      animKeys.forEach(k => {
+        const btn = document.getElementById(`btn-${k}`);
+        if (k === animKey) {
+          btn.className = "px-4 py-3 text-left text-xs font-bold rounded border transition-all bg-zinc-800 border-zinc-700 text-white";
+        } else {
+          btn.className = "px-4 py-3 text-left text-xs font-bold rounded border transition-all text-zinc-400 border-zinc-850 hover:text-white bg-zinc-900/50";
+        }
+      });
+
+      // Update text explanations
+      const spec = animationSpecs[animKey];
+      document.getElementById('anim-title').innerText = spec.title;
+      document.getElementById('anim-tagline').innerText = spec.tagline;
+      document.getElementById('anim-desc').innerText = spec.desc;
+
+      // Update bullet points
+      const bulletsList = document.getElementById('anim-bullets');
+      bulletsList.innerHTML = '';
+      spec.bullets.forEach(b => {
+        const li = document.createElement('li');
+        li.innerText = b;
+        bulletsList.appendChild(li);
+      });
+
+      // Update CSS code text
+      document.getElementById('anim-css').innerText = spec.css;
+
+      // Update phone simulator link cards classes
+      const cards = document.querySelectorAll('.card-element');
+      cards.forEach(c => {
+        // Reset animation classes
+        c.classList.remove('card-brutalist', 'card-gallery-zoom', 'card-curtain', 'card-split-vertical', 'card-gradient-glow', 'card-blueprint');
+        // Add current animation class
+        c.classList.add(`card-${animKey}`);
+      });
+    }
+
+    function toggleDarkMode() {
+      isDarkMode = !isDarkMode;
+      const screen = document.getElementById('phone-screen');
+      const avatarContainer = document.getElementById('avatar-container');
+      const cards = document.querySelectorAll('.card-element');
+      const drawerBorder = document.querySelectorAll('.drawer');
+      
+      if (isDarkMode) {
+        screen.classList.remove('bg-white', 'text-zinc-900');
+        screen.classList.add('bg-zinc-950', 'text-zinc-100', 'theme-dark');
+        avatarContainer.classList.add('border-zinc-100');
+        
+        cards.forEach(c => {
+          c.classList.remove('border-zinc-300', 'bg-zinc-50/50');
+          c.classList.add('border-zinc-800', 'bg-zinc-900/40');
+        });
+        
+        drawerBorder.forEach(d => {
+          d.classList.remove('border-zinc-200/50');
+          d.classList.add('border-zinc-800/50');
+        });
+      } else {
+        screen.classList.remove('bg-zinc-950', 'text-zinc-100', 'theme-dark');
+        screen.classList.add('bg-white', 'text-zinc-900');
+        avatarContainer.classList.remove('border-zinc-100');
+        
+        cards.forEach(c => {
+          c.classList.add('border-zinc-300', 'bg-zinc-50/50');
+          c.classList.remove('border-zinc-800', 'bg-zinc-900/40');
+        });
+
+        drawerBorder.forEach(d => {
+          d.classList.add('border-zinc-200/50');
+          d.classList.remove('border-zinc-800/50');
+        });
+      }
+    }
+  </script>
+</body>
+</html>
